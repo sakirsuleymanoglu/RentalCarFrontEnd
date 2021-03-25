@@ -1,12 +1,29 @@
+<h4 class="mt-3">Arabalar</h4>
 <table class="table">
     <thead>
         <tr>
-            <th>Marka</th> 
+            <th>Marka</th>
+            <th>Model</th>
+            <th>Yıl</th>
+            <th>Renk</th>
+            <th>Günlük Fiyat</th>
     </thead>
     <tbody>
-        <tr *ngFor="let car of cars">
+        <tr *ngFor="let car of carsDto">
             <td>
-                {{car.modelYear}} - {{car.model}}
+                {{car.brandName}}
+            </td>
+            <td>
+                {{car.model}}
+            </td>
+            <td>
+                {{car.modelYear}}
+            </td>
+            <td>
+                {{car.colorName}}
+            </td>
+            <td>
+                {{car.dailyPrice}} ₺
             </td>
         </tr>
     </tbody>

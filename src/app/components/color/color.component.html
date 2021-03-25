@@ -1,22 +1,6 @@
-<div class="list-group">
-    <label class="list-group-item">
-      <input class="form-check-input me-1" type="checkbox" value="">
-      First checkbox
-    </label>
-    <label class="list-group-item">
-      <input class="form-check-input me-1" type="checkbox" value="">
-      Second checkbox
-    </label>
-    <label class="list-group-item">
-      <input class="form-check-input me-1" type="checkbox" value="">
-      Third checkbox
-    </label>
-    <label class="list-group-item">
-      <input class="form-check-input me-1" type="checkbox" value="">
-      Fourth checkbox
-    </label>
-    <label class="list-group-item">
-      <input class="form-check-input me-1" type="checkbox" value="">
-      Fifth checkbox
-    </label>
-  </div>
+<h4 class="mt-3">Renkler</h4>
+<div class="list-group mt-3">
+  <li *ngFor="let color of colors" class="list-group-item">
+    {{color.name}}
+  </li>
+</div>
