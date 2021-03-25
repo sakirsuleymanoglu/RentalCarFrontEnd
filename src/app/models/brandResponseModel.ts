@@ -1,6 +1,6 @@
 import { Brand } from './brand';
-import { ResponseModel } from './responseModel'
+import { ListResponseModel } from './listResponseModel';
 
-export interface BrandResponseModel extends ResponseModel {
-  data: Brand[];
+export interface BrandResponseModel extends ListResponseModel<Brand> {
+ 
 }
