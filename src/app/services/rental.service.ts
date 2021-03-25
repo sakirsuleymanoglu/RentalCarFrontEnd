@@ -8,7 +8,7 @@ import { RentalDtoResponseModel } from '../models/rentalDtoResponseModel';
 })
 export class RentalService {
   private apiUrlByGetAllDetails =
-    'https://localhost:44394/api/Cars/getallwithdetails';
+    'https://localhost:44394/api/Rentals/getallwithdetails';
 
   constructor(private httpClient: HttpClient) {}
 

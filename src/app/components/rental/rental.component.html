@@ -1,1 +1,26 @@
-<p>rental works!</p>
+<h4 class="mt-3">Kiralamalar</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Marka</th>
+            <th>Model</th>
+            <th>Renk</th>
+            <th>Kiracı</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let rental of rentalsDto">
+            <td>
+                {{rental.brandName}}
+            </td>
+            <td>
+                {{rental.model}}
+            </td>
+            <td>
+                {{rental.colorName}}
+            </td>
+            <td>
+                {{rental.firstName}} {{rental.lastName}}
+            </td>
+        </tr>
+    </tbody>
+</table>
