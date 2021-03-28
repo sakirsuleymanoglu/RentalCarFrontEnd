@@ -9,17 +9,24 @@ import { CarResponseModel } from '../models/carResponseModel';
 })
 export class CarService {
 
-  apiUrlByGetAll = "https://localhost:44394/api/Cars/getall";
-  apiUrlByGetAllDetails = "https://localhost:44394/api/Cars/getallwithdetails"
+  apiUrl = "https://localhost:44394/api/";
 
   constructor(private httpClient:HttpClient) { }
 
   getCars():Observable<CarResponseModel>{
-    return this.httpClient.get<CarResponseModel>(this.apiUrlByGetAll);
+    let newPath = this.apiUrl + "Cars/getall";
+    return this.httpClient.get<CarResponseModel>(newPath);
   }
 
   getDetailsOfCars():Observable<CarDtoResponseModel>{
-    return this.httpClient.get<CarDtoResponseModel>(this.apiUrlByGetAllDetails);
+    let newPath = this.apiUrl + "Cars/getallwithdetails";
+    return this.httpClient.get<CarDtoResponseModel>(newPath);
   }
 
-}
+  getDetailsOfCarsByBrand(brandId:number):Observable<CarDtoResponseModel>{
+    let newPath = this.apiUrl + "Cars/getallwithdetailsbybrandid?brandId=" + brandId;
+    return this.httpClient.get<CarDtoResponseModel>(newPath);
+  }
+
+  }
+

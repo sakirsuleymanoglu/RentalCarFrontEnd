@@ -1,6 +1,9 @@
 <h4 class="mt-3">Markalar</h4>
 <div class="list-group mt-3">
-  <li (click)="setCurrentBrand(brand)" *ngFor="let brand of brands" [class]="getCurrentBrandClass(brand)">
+  <li routerLink = "/cars" [class]="getAllBrandClass()">Tüm Ürünler</li>
+  <li (click)="setCurrentBrand(brand)" 
+  routerLink = "/cars/brand/{{brand.id}}"
+  *ngFor="let brand of brands" [class]="getCurrentBrandClass(brand)">
     {{ brand.name }}
   </li>
   <h3 *ngIf="currentBrand">{{currentBrand.name}}</h3>
