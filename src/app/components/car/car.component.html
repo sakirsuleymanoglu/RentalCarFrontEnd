@@ -1,35 +1,45 @@
-<h4 class="mt-3">Arabalar</h4>
 <table class="table">
-    <thead>
-        <tr>
-            <th>Marka</th>
-            <th>Model</th>
-            <th>Yıl</th>
-            <th>Renk</th>
-            <th>Günlük Fiyat</th>
-    </thead>
-    <tbody>
-        <tr *ngFor="let car of carsDto">
-            <td>
-                {{car.brandName}}
-            </td>
-            <td>
-                {{car.model}}
-            </td>
-            <td>
-                {{car.modelYear}}
-            </td>
-            <td>
-                {{car.colorName}}
-            </td>
-            <td>
-                {{car.dailyPrice}} ₺
-            </td>
-            <td>
-                <button 
-                (click) = "setCurrentCar(car)"
-                class="btn btn-primary">Detaya Git</button>
-            </td>
-        </tr>
-    </tbody>
+  <thead>
+    <tr>
+      <th>Marka</th>
+      <th>Model</th>
+      <th>Yıl</th>
+      <th>Renk</th>
+      <th>Günlük Fiyat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let car of carsDto">
+      <td>
+        {{ car.brandName }}
+      </td>
+      <td>
+        {{ car.model }}
+      </td>
+      <td>
+        {{ car.modelYear }}
+      </td>
+      <td>
+        {{ car.colorName }}
+      </td>
+      <td>{{ car.dailyPrice }} ₺</td>
+      <td>
+        <button
+          routerLink="/cars/car/{{ car.id }}"
+          (click)="setCurrentCar(car)"
+          class="btn btn-primary"
+        >
+          Detaya Git</button
+        >
+      </td>
+    </tr>
+  </tbody>
 </table>
+
+
+
+
+
+
+    
+    

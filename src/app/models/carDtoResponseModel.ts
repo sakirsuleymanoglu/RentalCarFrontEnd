@@ -1,6 +1,6 @@
 import { CarDto } from "./carDto";
-import { ListResponseModel } from "./listResponseModel";
+import { ResponseModel } from "./responseModel";
 
-export interface CarDtoResponseModel extends ListResponseModel<CarDto>{
-    
+export interface CarDtoResponseModel extends ResponseModel{
+    car:CarDto;
 }
