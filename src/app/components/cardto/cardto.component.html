@@ -1,1 +1,12 @@
-<p>ewqewqeqe</p>
+<div *ngIf="car" class="card mt-3" style="width: 18rem">
+  <div *ngFor="let image of car.images">
+    <img [src]="imageDomSanitizer(image.imagePath)">
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">
+      {{ car.brandName }} {{ car.model }} {{ car.modelYear }}
+      {{ car.colorName }}
+    </h5>
+    <p class="card-text">{{ car.dailyPrice }} ₺</p>
+  </div>
+</div>
