@@ -10,6 +10,7 @@ import { BrandService } from 'src/app/services/brand.service';
 export class BrandComponent implements OnInit {
   brands: Brand[] = [];
   currentBrand: Brand;
+  empytBrand: Brand;
 
   constructor(private brandService: BrandService) {}
 
@@ -40,5 +41,9 @@ export class BrandComponent implements OnInit {
       return 'list-group-item active';
     }
     return 'list-group-item';
+  }
+
+  clearFilterBrand() {
+    this.currentBrand = this.empytBrand;
   }
 }
