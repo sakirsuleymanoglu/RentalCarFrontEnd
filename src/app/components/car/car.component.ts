@@ -13,10 +13,11 @@ export class CarComponent implements OnInit {
   cars: Car[] = [];
   carsDto: CarDto[] = [];
   currentCar: CarDto;
-  filterByBrandName = "";
-  filterByModel = "";
-  filterByModelYear = "";
-  filterByColor ="";
+  selectedOptionValue:string;
+  filterByBrandName:string;
+  filterByModel:string;
+  filterByModelYear:string;
+  filterByColor:string;
 
   constructor(
     private carService: CarService,
@@ -63,5 +64,11 @@ export class CarComponent implements OnInit {
     this.currentCar = car;
   }
 
+  setVisible(){
+    if(!this.selectedOptionValue){
+      return "invisible"
+    }
+    return "visible"
+  }
 
 }

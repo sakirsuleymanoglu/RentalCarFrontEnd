@@ -1,11 +1,25 @@
-<h3 class="mt-3">
-  {{ car.brandName }} {{ car.model }} {{ car.modelYear }}
-  {{ car.colorName }}
-</h3>
-<div *ngFor="let image of car.images" class="card" style="width: 25rem">
-  <img
-    [src]="getImage(image.imagePath)"
-    class="card-img-top"
-    [alt]="car.brandName"
-  />
+<div class="mb-3">
+  <div *ngFor="let image of car.images" class="card bg-dark text-white mt-3">
+    <img [src]="getImage(image.imagePath)" class="card-img" alt="..." />
+    <div class="card-img-overlay">
+      <h5 class="card-title">
+        {{ car.brandName }} {{ car.model }} {{ car.modelYear }}
+        {{ car.colorName }}
+      </h5>
+    </div>
+  </div>
+</div>
+
+<div class="card text-center">
+  <div class="card-header">Detaylar</div>
+  <div class="card-body">
+    <h3 class="card-title"> {{ car.brandName }} {{ car.model }} {{ car.modelYear }}
+      {{ car.colorName }}</h3>
+    <h4 class="card-title">{{ car.dailyPrice }} ₺</h4>
+    <p class="card-text">Marka : {{ car.brandName }}</p>
+    <p class="card-text">Model : {{ car.model }}</p>
+    <p class="card-text">Yıl : {{ car.modelYear }}</p>
+    <p class="card-text">Renk : {{ car.colorName }}</p>
+    <button type="button" class="btn btn-primary">Kirala</button>
+  </div>
 </div>

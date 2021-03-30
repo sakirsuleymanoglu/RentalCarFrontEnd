@@ -34,6 +34,5 @@ export class CardtoComponent implements OnInit {
 
   getImage(imagePath:string){
     return this.carImageService.getImage(imagePath);
-  }
-  
+  }  
 }
