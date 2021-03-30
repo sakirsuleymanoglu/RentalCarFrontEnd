@@ -1,0 +1,52 @@
+<div class="mb-3 mt-3">
+  <form [formGroup]="rentalAddForm">
+    <label for="carId" class="form-group">Araç Numarası</label>
+    <div class="form-group">
+      <input
+        id="carId"
+        type="number"
+        formControlName="carId"
+        class="form-control"
+      />
+    </div>
+    <label for="customerId" class="form-group mt-3">Müşteri Numarası</label>
+    <div class="form-group">
+      <input
+        id="customerId"
+        type="number"
+        formControlName="customerId"
+        class="form-control"
+      />
+    </div>
+    <label for="customerId" class="form-group mt-3">Kiralama Tarihi</label>
+    <div class="form-group">
+      <input
+        id="rentDate"
+        type="date"
+        formControlName="rentDate"
+        class="form-control"
+      />
+    </div>
+    <label for="customerId" class="form-group mt-3">Veriş Tarihi</label>
+    <div class="form-group">
+      <input
+        id="returnDate"
+        type="date"
+        formControlName="returnDate"
+        class="form-control"
+      />
+    </div>
+  </form>
+</div>
+<div class="mb-3 mt-3">
+  <button
+    (click)="accept()"
+    type="button"
+    class="btn btn-primary form-group"
+    routerLink="/cars/car/{{ accept().carId }}/rental/payment/customer/{{
+      accept().customerId
+    }}/rentDate/{{ accept().rentDate }}/returnDate/{{ accept().returnDate }}"
+  >
+    Onayla
+  </button>
+</div>

@@ -20,6 +20,7 @@
     <p class="card-text">Model : {{ car.model }}</p>
     <p class="card-text">Yıl : {{ car.modelYear }}</p>
     <p class="card-text">Renk : {{ car.colorName }}</p>
-    <button type="button" class="btn btn-primary">Kirala</button>
+    <button 
+    routerLink="/cars/car/{{car.id}}//rental/add" type="button" class="btn btn-primary">Kirala</button>
   </div>
 </div>

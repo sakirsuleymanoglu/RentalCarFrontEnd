@@ -1,0 +1,62 @@
+<div class="mb-3 mt-3">
+<div class="card" style="width: 50rem">
+  <div class="card-body">
+    <h5 class="card-title">Kart Bilgileri</h5>
+    <form [formGroup]="paymentOperationForm">
+      <label for="cardNumber" class="form-group">Kart Numarası</label>
+      <div class="form-group">
+        <input
+          id="cardNumber"
+          type="string"
+          formControlName="cardNumber"
+          class="form-control"
+        />
+      </div>
+
+      <label for="cardDate" class="form-group">Son Kullanma Tarihi (Ay/Yıl)</label>
+      <div class="form-group">
+        <input
+          id="cardDate"
+          type="string"
+          formControlName="cardDate"
+          class="form-control"
+        />
+      </div>
+
+      <label for="cardSecurityValue" class="form-group">Kart 3 Haneli Güvenlik Değeri</label>
+      <div class="form-group">
+        <input
+          id="cardSecurityValue"
+          type="string"
+          formControlName="cardSecurityValue"
+          class="form-control"
+        />
+      </div>
+
+      <label for="cardHasPersonName" class="form-group">Adınız</label>
+      <div class="form-group">
+        <input
+          id="cardHasPersonName"
+          type="string"
+          formControlName="cardHasPersonName"
+          class="form-control"
+        />
+      </div>
+
+      
+      <label for="cardHasPersonSurname" class="form-group">Soyadınız</label>
+      <div class="form-group">
+        <input
+          id="cardHasPersonSurname"
+          type="string"
+          formControlName="cardHasPersonSurname"
+          class="form-control"
+        />
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+<div class="mb-3 mt-3">
+  <button type="button" class="btn btn-primary">Ödemeyi Yap</button>
+</div>
