@@ -1,9 +1,11 @@
-<div class="list-group mt-3">
-  <li (click)="clearFilterBrand()" routerLink = "/cars" [class]="getAllBrandClass()">Tüm Ürünler</li>
-  <li (click)="setCurrentBrand(brand)" 
-  routerLink = "/cars/brand/{{brand.id}}"
-  *ngFor="let brand of brands" [class]="getCurrentBrandClass(brand)">
-    {{ brand.name }}
-  </li>
-</div>
+<select class="form-select">
+  <option
+    *ngFor="let brand of brands"
+    (click)="setCurrentBrand(brand)"
+    [value]="brand.id"
+  >
+  {{brand.name}}
+  </option>
+</select>
+<button type="button" class="btn btn-primary mt-3">Filtrele</button>
 

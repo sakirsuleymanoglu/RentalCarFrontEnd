@@ -13,6 +13,7 @@ export class CarComponent implements OnInit {
   cars: Car[] = [];
   carsDto: CarDto[] = [];
   currentCar: CarDto;
+  filterByBrandName = ""
 
   constructor(
     private carService: CarService,

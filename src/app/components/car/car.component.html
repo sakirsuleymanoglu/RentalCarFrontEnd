@@ -1,3 +1,12 @@
+<div class="mb-3 mt-3">
+  <input type="search" 
+  [(ngModel)]="filterByBrandName"
+  class="form-control" id="brandName" placeholder="Marka adı giriniz">
+</div>
+<div *ngIf="filterByBrandName" class="alert alert-success">
+  {{filterByBrandName}} aradınız.
+</div>
+
 <table class="table">
   <thead>
     <tr>
@@ -9,7 +18,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let car of carsDto">
+    <tr *ngFor="let car of carsDto | filterByBrand : filterByBrandName">
       <td>
         {{ car.brandName }}
       </td>

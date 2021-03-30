@@ -1,7 +1,9 @@
-<div class="list-group mt-3">
-  <li (click)="setCurrentColor(color)" 
-  routerLink = "/cars/color/{{color.id}}"
-  *ngFor="let color of colors" [class]="getCurrentColorClass(color)">
-    {{color.name}}
-  </li>
-</div>
+<select class="form-select mt-3">
+  <option
+    (click)="setCurrentColor(color)"
+    *ngFor="let color of colors"
+  >
+    {{ color.name }}
+  </option>
+</select>
+<button type="button" class="btn btn-primary mt-3">Filtrele</button>
