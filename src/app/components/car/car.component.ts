@@ -13,7 +13,10 @@ export class CarComponent implements OnInit {
   cars: Car[] = [];
   carsDto: CarDto[] = [];
   currentCar: CarDto;
-  filterByBrandName = ""
+  filterByBrandName = "";
+  filterByModel = "";
+  filterByModelYear = "";
+  filterByColor ="";
 
   constructor(
     private carService: CarService,
@@ -22,10 +25,10 @@ export class CarComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
-      if (params['brandId']) {
-        this.getDetailsOfCarsByBrand(params['brandId']);
-      } else if (params['colorId']) {
-        this.getDetailsOfCarsByColor(params['colorId']);
+      if (params["brandId"]) {
+        this.getDetailsOfCarsByBrand(params["brandId"]);
+      } else if (params["colorId"]) {
+        this.getDetailsOfCarsByColor(params["colorId"]);
       } else {
         this.getDetailsOfCars();
       }
@@ -59,4 +62,6 @@ export class CarComponent implements OnInit {
   setCurrentCar(car: CarDto) {
     this.currentCar = car;
   }
+
+
 }

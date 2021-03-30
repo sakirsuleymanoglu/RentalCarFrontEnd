@@ -1,9 +1,16 @@
-<select class="form-select mt-3">
-  <option
-    (click)="setCurrentColor(color)"
-    *ngFor="let color of colors"
+<div class="mt-3">
+  <h6 class="text-primary">Renk</h6>
+  <select class="form-select" [(ngModel)]="selectedColor">
+    <option *ngFor="let color of colors" [ngValue]="color">
+      {{ color.name }}
+    </option>
+  </select>
+  <button
+    routerLink="/cars/color/{{ selectedColor.id }}"
+    type="button"
+    class="btn btn-primary mt-3"
   >
-    {{ color.name }}
-  </option>
-</select>
-<button type="button" class="btn btn-primary mt-3">Filtrele</button>
+    Filtrele
+  </button>
+</div>
+

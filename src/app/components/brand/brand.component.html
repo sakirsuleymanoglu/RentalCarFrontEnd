@@ -1,11 +1,15 @@
-<select class="form-select">
-  <option
-    *ngFor="let brand of brands"
-    (click)="setCurrentBrand(brand)"
-    [value]="brand.id"
+<div class="mt-3">
+  <h6 class="text-primary">Marka</h6>
+  <select class="form-select" [(ngModel)]="selectedBrand">
+    <option *ngFor="let brand of brands" [ngValue]="brand">
+      {{ brand.name }}
+    </option>
+  </select>
+  <button
+    routerLink="/cars/brand/{{ selectedBrand.id }}"
+    type="button"
+    class="btn btn-primary mt-3"
   >
-  {{brand.name}}
-  </option>
-</select>
-<button type="button" class="btn btn-primary mt-3">Filtrele</button>
-
+    Filtrele
+  </button>
+</div>

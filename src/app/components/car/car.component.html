@@ -1,10 +1,41 @@
 <div class="mb-3 mt-3">
-  <input type="search" 
-  [(ngModel)]="filterByBrandName"
-  class="form-control" id="brandName" placeholder="Marka adı giriniz">
+  <input
+    type="search"
+    [(ngModel)]="filterByBrandName"
+    class="form-control"
+    id="brandName"
+    placeholder="Marka"
+  />
 </div>
-<div *ngIf="filterByBrandName" class="alert alert-success">
-  {{filterByBrandName}} aradınız.
+
+<div class="mb-3 mt-3">
+  <input
+    type="search"
+    [(ngModel)]="filterByModel"
+    class="form-control"
+    id="model"
+    placeholder="Model"
+  />
+</div>
+
+<div class="mb-3 mt-3">
+  <input
+    type="search"
+    [(ngModel)]="filterByModelYear"
+    class="form-control"
+    id="modelYear"
+    placeholder="Yıl"
+  />
+</div>
+
+<div class="mb-3 mt-3">
+  <input
+    type="search"
+    [(ngModel)]="filterByColor"
+    class="form-control"
+    id="color"
+    placeholder="Renk"
+  />
 </div>
 
 <table class="table">
@@ -18,7 +49,16 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let car of carsDto | filterByBrand : filterByBrandName">
+    <tr
+      *ngFor="
+        let car of carsDto
+          | filter
+            : filterByBrandName
+            : filterByModel
+            : filterByModelYear
+            : filterByColor
+      "
+    >
       <td>
         {{ car.brandName }}
       </td>
@@ -38,17 +78,9 @@
           (click)="setCurrentCar(car)"
           class="btn btn-primary"
         >
-          Detaya Git</button
-        >
+          Detaya Git
+        </button>
       </td>
     </tr>
   </tbody>
 </table>
-
-
-
-
-
-
-    
-    
