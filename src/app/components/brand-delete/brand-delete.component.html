@@ -1,1 +1,18 @@
-<p>brand-delete works!</p>
+<div *ngIf="!brand && brands" class="mb-3 mt-3">
+    <table class="table">
+        <thead>
+            <th class="text-primary">Marka</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let brand of brands">
+                <td>{{brand.name}}</td>
+                <td><button (click)="delete(brand)" type="button" class="btn btn-danger">Sil</button>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div *ngIf="brand" class="mb-3 mt-3">
+    <p>brand</p>
+</div>
+

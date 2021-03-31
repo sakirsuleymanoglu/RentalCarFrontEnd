@@ -1,1 +1,35 @@
-<p>color-add works!</p>
+<div class="mb-3 mt-3">
+    <button (click) = 'list()' type="button" class="btn btn-success">Renkleri Göster</button>
+    <button (click) = 'deList()' type="button" class="btn btn-danger ms-3">Renkleri Gizle</button>
+</div>
+<div *ngIf="colors" class="mb-3 mt-3">
+    <table class="table">
+        <thead>
+            <th>Renk</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let color of colors">
+                <td>{{color.name}}</td>
+                <td><button routerLink="/color/update/{{color.id}}" type="button" class="btn btn-success">Güncelle</button></td>
+                <td><button routerLink="/color/delete/{{color.id}}" type="button" class="btn btn-danger">Sil</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="mb-3 mt-3">
+    <form [formGroup]="colorAddForm">
+        <label for="name" class="form-group text-primary">Renk Adı</label>
+        <div class="form-group">
+          <input
+            id="name"
+            type="text"
+            formControlName="name"
+            class="form-control"
+          />
+        </div>
+    </form>
+</div>
+<div class="mb-3 mt-3">
+    <button (click)='add()' type="button" class="btn btn-primary">Ekle</button>
+</div>

@@ -16,6 +16,8 @@ import { BrandService } from 'src/app/services/brand.service';
 export class BrandAddComponent implements OnInit {
   brandAddForm: FormGroup;
   brand: Brand;
+  brands:Brand[];
+  emptyBrands:Brand[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,8 +38,19 @@ export class BrandAddComponent implements OnInit {
     if (this.brandAddForm.valid) {
       this.brand = Object.assign({}, this.brandAddForm.value);
       this.brandService.add(this.brand).subscribe((response) => {
-        alert(response.success);
+        this.list();
       });
     }
+  }
+
+  list(){
+    this.brandService.getBrands().subscribe((response)=>{
+      this.brands = response.data;
+      return this.brands;
+    });
+  }
+
+  deList(){
+    this.brands = this.emptyBrands;
   }
 }

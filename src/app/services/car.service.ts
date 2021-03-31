@@ -3,9 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Car } from '../models/car';
 import { CarDto } from '../models/carDto';
-import { CarDtoResponseModel } from '../models/carDtoResponseModel';
-import { CarResponseModel } from '../models/carResponseModel';
 import { ListResponseModel } from '../models/listResponseModel';
+import { SingleResponseModel } from '../models/singleResponseModel';
 
 @Injectable({
   providedIn: 'root',
@@ -41,13 +40,13 @@ export class CarService {
     return this.httpClient.get<ListResponseModel<CarDto>>(newPath);
   }
 
-  getDetailsOfCarByCarId(carId: number): Observable<CarDtoResponseModel> {
+  getDetailsOfCarByCarId(carId: number): Observable<SingleResponseModel<CarDto>> {
     let newPath = this.apiUrl + 'Cars/getwithdetailsbycarid?carId=' + carId;
-    return this.httpClient.get<CarDtoResponseModel>(newPath);
+    return this.httpClient.get<SingleResponseModel<CarDto>>(newPath);
   }
 
-  getCarById(carId: number): Observable<CarResponseModel> {
+  getCarById(carId: number): Observable<SingleResponseModel<Car>> {
     let newPath = this.apiUrl + 'Cars/getbyid?id=' + carId;
-    return this.httpClient.get<CarResponseModel>(newPath);
+    return this.httpClient.get<SingleResponseModel<Car>>(newPath);
   }
 }

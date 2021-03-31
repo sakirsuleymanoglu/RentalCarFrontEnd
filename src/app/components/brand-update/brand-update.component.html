@@ -1,1 +1,61 @@
-<p>brand-update works!</p>
+<div *ngIf="isUpdate" class="mb-3 mt-3">
+  <form [formGroup]="brandUpdateForm">
+    <label for="name" class="form-group text-primary">Marka Adı</label>
+    <div class="form-group">
+      <input
+        id="name"
+        type="text"
+        formControlName="name"
+        class="form-control"
+      />
+    </div>
+  </form>
+  <div class="mb-3 mt-3">
+    <button (click)="update()" type="button" class="btn btn-success">
+      Güncelle
+    </button>
+  </div>
+</div>
+
+<div *ngIf="!brand && brands" class="mb-3 mt-3">
+  <table class="table">
+    <thead>
+      <th class="text-primary">Marka</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let brand of brands">
+        <td>{{ brand.name }}</td>
+        <td>
+          <button
+            (click)="checkUpdate(brand)"
+            type="button"
+            class="btn btn-success"
+          >
+            Güncelle
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="brand" class="mb-3 mt-3">
+    <h3>Güncellenecek Marka</h3>
+    <p>{{brand.name}}</p>
+    <form [formGroup]="selectedBrandUpdateForm">
+        <label for="name" class="form-group text-primary">Marka Adı</label>
+        <div class="form-group">
+          <input
+            id="name"
+            type="text"
+            formControlName="name"
+            class="form-control"
+          />
+        </div>
+      </form>
+      <div class="mb-3 mt-3">
+        <button (click)="selectedBrandUpdate()" type="button" class="btn btn-success">
+          Güncelle
+        </button>
+      </div>
+</div>

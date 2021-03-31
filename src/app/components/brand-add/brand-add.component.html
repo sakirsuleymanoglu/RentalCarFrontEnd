@@ -1,4 +1,23 @@
 <div class="mb-3 mt-3">
+    <button (click) = 'list()' type="button" class="btn btn-success">Markaları Göster</button>
+    <button (click) = 'deList()' type="button" class="btn btn-danger ms-3">Markaları Gizle</button>
+</div>
+<div *ngIf="brands" class="mb-3 mt-3">
+    <table class="table">
+        <thead>
+            <th>Marka</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let brand of brands">
+                <td>{{brand.name}}</td>
+                <td><button routerLink="/brand/update/{{brand.id}}" type="button" class="btn btn-success">Güncelle</button></td>
+                <td><button routerLink="/brand/delete/{{brand.id}}" type="button" class="btn btn-danger">Sil</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="mb-3 mt-3">
     <form [formGroup]="brandAddForm">
         <label for="name" class="form-group text-primary">Marka Adı</label>
         <div class="form-group">

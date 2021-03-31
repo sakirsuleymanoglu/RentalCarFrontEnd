@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CreditCardResponseModel } from '../models/creditCardResponseModel';
+import { CreditCard } from '../models/creditCard';
+import { SingleResponseModel } from '../models/singleResponseModel';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,9 @@ export class PaymentService {
 
   constructor(private httpClient:HttpClient) { }
   
-  getCreditCardByCustomerId(customerId:number):Observable<CreditCardResponseModel>{
+  getCreditCardByCustomerId(customerId:number):Observable<SingleResponseModel<CreditCard>>{
     let newPath = this.apiUrl + 'Payments/getbycustomerid?customerId='+customerId;
-    return this.httpClient.get<CreditCardResponseModel>(newPath);
+    return this.httpClient.get<SingleResponseModel<CreditCard>>(newPath);
   }
 
 }

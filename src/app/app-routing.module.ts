@@ -35,7 +35,11 @@ const routes: Routes = [
   {path:'brand/update', component:BrandUpdateComponent},
   {path:'color/add', component:ColorAddComponent},
   {path:'color/delete', component:ColorDeleteComponent},
-  {path:'color/update', component:ColorUpdateComponent}
+  {path:'color/update', component:ColorUpdateComponent},
+  {path:'brand/update/:brandId', component:BrandUpdateComponent},
+  {path:'brand/delete/:brandId', component:BrandDeleteComponent},
+  {path:'color/update/:colorId', component:ColorUpdateComponent},
+  {path:'color/delete/:colorId', component:ColorDeleteComponent}
 ];
 
 @NgModule({
