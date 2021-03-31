@@ -17,11 +17,8 @@ import { PaymentComponent } from './components/payment/payment.component';
 import { BrandAddComponent } from './components/brand-add/brand-add.component';
 import { ColorAddComponent } from './components/color-add/color-add.component';
 import { CarAddComponent } from './components/car-add/car-add.component';
-import { CarDeleteComponent } from './components/car-delete/car-delete.component';
 import { CarUpdateComponent } from './components/car-update/car-update.component';
-import { BrandDeleteComponent } from './components/brand-delete/brand-delete.component';
 import { BrandUpdateComponent } from './components/brand-update/brand-update.component';
-import { ColorDeleteComponent } from './components/color-delete/color-delete.component';
 import { ColorUpdateComponent } from './components/color-update/color-update.component';
 
 @NgModule({
@@ -40,11 +37,8 @@ import { ColorUpdateComponent } from './components/color-update/color-update.com
     BrandAddComponent,
     CarAddComponent,
     ColorAddComponent,
-    CarDeleteComponent,
     CarUpdateComponent,
-    BrandDeleteComponent,
     BrandUpdateComponent,
-    ColorDeleteComponent,
     ColorUpdateComponent,
   ],
   imports: [
