@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 
 import { RouterModule, Routes } from '@angular/router';
+import { CarAddComponent } from './components/car-add/car-add.component';
+import { CarDeleteComponent } from './components/car-delete/car-delete.component';
+import { CarUpdateComponent } from './components/car-update/car-update.component';
 import { CarComponent } from './components/car/car.component';
 import { CardtoComponent } from './components/cardto/cardto.component';
 import { PaymentComponent } from './components/payment/payment.component';
@@ -18,6 +21,9 @@ const routes: Routes = [
       'cars/car/:carId/rental/payment/customer/:customerId/rentDate/:rentDate/returnDate/:returnDate',
     component: PaymentComponent,
   },
+  {path:'car/add', component:CarAddComponent},
+  {path:'car/delete', component:CarDeleteComponent},
+  {path:'car/update', component:CarUpdateComponent}
 ];
 
 @NgModule({

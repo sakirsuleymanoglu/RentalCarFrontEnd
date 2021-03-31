@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators} from '@angular/forms'
+import {FormGroup, FormBuilder, FormControl, Validators} from '@angular/forms'
 
 @Component({
   selector: 'app-car-add',
@@ -8,9 +8,24 @@ import { FormGroup, FormBuilder, FormControl, Validators} from '@angular/forms'
 })
 export class CarAddComponent implements OnInit {
 
-  constructor() { }
+  carAddForm:FormGroup;
+
+  constructor(private formBuilder:FormBuilder) { }
 
   ngOnInit(): void {
+    this.createCarAddForm();
   }
+
+  createCarAddForm() {
+    this.carAddForm = this.formBuilder.group({
+      brandId: ['', Validators.required],
+      colorId: ['', Validators.required],
+      model: ['', Validators.required],
+      modelYear: ['', Validators.required],
+      dailyPrice: ['', Validators.required],
+      description: ['', Validators.required],
+    });
+  }
+
 
 }
