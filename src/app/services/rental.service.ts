@@ -20,7 +20,7 @@ export class RentalService {
   }
 
   add(rental: Rental, totalPrice: number): Observable<ResponseModel> {
-    let newPath = this.apiUrl + 'Rentals/add';
+    let newPath = this.apiUrl + 'Rentals/add?price=' + totalPrice;
     return this.httpClient.post<ResponseModel>(newPath, rental);
   }
 }

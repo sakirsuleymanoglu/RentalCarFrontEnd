@@ -13,46 +13,46 @@
           />
         </div>
 
-        <label for="cardDate" class="form-group"
+        <label for="cardLastUseDate" class="form-group"
           >Son Kullanma Tarihi (Ay/Yıl)</label
         >
         <div class="form-group">
           <input
-            id="cardDate"
+            id="cardLastUseDate"
             type="string"
-            formControlName="cardDate"
+            formControlName="cardLastUseDate"
             class="form-control"
           />
         </div>
 
-        <label for="cardSecurityValue" class="form-group"
+        <label for="securityValue" class="form-group"
           >Kart 3 Haneli Güvenlik Değeri</label
         >
         <div class="form-group">
           <input
-            id="cardSecurityValue"
+            id="securityValue"
             type="string"
-            formControlName="cardSecurityValue"
+            formControlName="securityValue"
             class="form-control"
           />
         </div>
 
-        <label for="cardHasPersonName" class="form-group">Adınız</label>
+        <label for="firstName" class="form-group">Adınız</label>
         <div class="form-group">
           <input
-            id="cardHasPersonName"
+            id="firstName"
             type="string"
-            formControlName="cardHasPersonName"
+            formControlName="firstName"
             class="form-control"
           />
         </div>
 
-        <label for="cardHasPersonSurname" class="form-group">Soyadınız</label>
+        <label for="lastName" class="form-group">Soyadınız</label>
         <div class="form-group">
           <input
-            id="cardHasPersonSurname"
+            id="lastName"
             type="string"
-            formControlName="cardHasPersonSurname"
+            formControlName="lastName"
             class="form-control"
           />
         </div>
@@ -61,7 +61,11 @@
   </div>
 </div>
 <div class="mb-3 mt-3">
-  <button (click)="pay(rental, totalPrice)" type="button" class="btn btn-primary">
+  <button
+    (click)="pay(rental, totalPrice)"
+    type="button"
+    class="btn btn-primary"
+  >
     Ödemeyi Yap
   </button>
 </div>
