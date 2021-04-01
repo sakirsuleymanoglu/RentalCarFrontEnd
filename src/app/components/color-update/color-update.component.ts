@@ -7,10 +7,9 @@ import { ColorService } from 'src/app/services/color.service';
 @Component({
   selector: 'app-color-update',
   templateUrl: './color-update.component.html',
-  styleUrls: ['./color-update.component.css']
+  styleUrls: ['./color-update.component.css'],
 })
 export class ColorUpdateComponent implements OnInit {
-
   color: Color;
   updatedColor: Color;
   colors: Color[];
@@ -18,7 +17,7 @@ export class ColorUpdateComponent implements OnInit {
   formColorData: Color;
   formSelectedColorData: Color;
   colorUpdateForm: FormGroup;
-  selectedColorUpdateForm:FormGroup;
+  selectedColorUpdateForm: FormGroup;
   constructor(
     private colorService: ColorService,
     private activatedRoute: ActivatedRoute,
@@ -47,7 +46,7 @@ export class ColorUpdateComponent implements OnInit {
     });
   }
 
-  createSelectedUpdateColorForm(){
+  createSelectedUpdateColorForm() {
     this.selectedColorUpdateForm = this.formBuilder.group({
       name: ['', Validators.required],
     });
@@ -59,15 +58,17 @@ export class ColorUpdateComponent implements OnInit {
   }
 
   update() {
-    this.formColorData = Object.assign({}, this.colorUpdateForm.value);
+    if (this.colorUpdateForm.valid) {
+      this.formColorData = Object.assign({}, this.colorUpdateForm.value);
 
-    this.colorService.getColor(this.updatedColor.id).subscribe((response) => {
-      this.updatedColor = response.data;
-      this.updatedColor.name = this.formColorData.name;
-      this.colorService.update(this.updatedColor).subscribe((response) => {
-        this.list();
+      this.colorService.getColor(this.updatedColor.id).subscribe((response) => {
+        this.updatedColor = response.data;
+        this.updatedColor.name = this.formColorData.name;
+        this.colorService.update(this.updatedColor).subscribe((response) => {
+          this.list();
+        });
       });
-    });
+    }
   }
 
   list() {
@@ -76,11 +77,14 @@ export class ColorUpdateComponent implements OnInit {
     });
   }
 
-  selectedColorUpdate(){
-    this.formSelectedColorData = Object.assign({}, this.selectedColorUpdateForm.value);
-    this.color.name = this.formSelectedColorData.name;
-    this.colorService.update(this.color).subscribe((response) => {
-    });
+  selectedColorUpdate() {
+    if (this.selectedColorUpdateForm.value) {
+      this.formSelectedColorData = Object.assign(
+        {},
+        this.selectedColorUpdateForm.value
+      );
+      this.color.name = this.formSelectedColorData.name;
+      this.colorService.update(this.color).subscribe((response) => {});
+    }
   }
-
 }

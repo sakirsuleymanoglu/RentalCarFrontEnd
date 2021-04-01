@@ -63,15 +63,17 @@ export class BrandUpdateComponent implements OnInit {
   }
 
   update() {
-    this.formBrandData = Object.assign({}, this.brandUpdateForm.value);
+    if(this.brandUpdateForm.valid){
+      this.formBrandData = Object.assign({}, this.brandUpdateForm.value);
 
-    this.brandService.getBrand(this.updatedBrand.id).subscribe((response) => {
-      this.updatedBrand = response.data;
-      this.updatedBrand.name = this.formBrandData.name;
-      this.brandService.update(this.updatedBrand).subscribe((response) => {
-        this.list();
+      this.brandService.getBrand(this.updatedBrand.id).subscribe((response) => {
+        this.updatedBrand = response.data;
+        this.updatedBrand.name = this.formBrandData.name;
+        this.brandService.update(this.updatedBrand).subscribe((response) => {
+          this.list();
+        });
       });
-    });
+    }
   }
 
   list() {
@@ -81,9 +83,11 @@ export class BrandUpdateComponent implements OnInit {
   }
 
   selectedBrandUpdate(){
-    this.formSelectedBrandData = Object.assign({}, this.selectedBrandUpdateForm.value);
-    this.brand.name = this.formSelectedBrandData.name;
-    this.brandService.update(this.brand).subscribe((response) => {
-    });
+    if(this.selectedBrandUpdateForm.valid){
+      this.formSelectedBrandData = Object.assign({}, this.selectedBrandUpdateForm.value);
+      this.brand.name = this.formSelectedBrandData.name;
+      this.brandService.update(this.brand).subscribe((response) => {
+      });
+    }
   }
 }

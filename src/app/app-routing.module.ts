@@ -39,6 +39,8 @@ const routes: Routes = [
   {path:'brand/update/:brandId', component:BrandUpdateComponent},
 
   {path:'color/update/:colorId', component:ColorUpdateComponent},
+
+  {path:'car/update/:carId', component:CarUpdateComponent}
  
 ];
 

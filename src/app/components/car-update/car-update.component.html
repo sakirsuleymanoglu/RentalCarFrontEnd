@@ -1,1 +1,210 @@
-<p>car-update works!</p>
+<div *ngIf="isUpdate" class="mb-3 mt-3">
+  <form [formGroup]="carUpdateForm">
+    <label for="brandId" class="form-group text-primary">Marka Id</label>
+    <div class="form-group">
+      <input
+        id="brandId"
+        type="text"
+        formControlName="brandId"
+        class="form-control"
+      />
+    </div>
+    <label for="colorId" class="form-group text-primary">Renk Id</label>
+    <div class="form-group">
+      <input
+        id="colorId"
+        type="text"
+        formControlName="colorId"
+        class="form-control"
+      />
+    </div>
+    <label for="model" class="form-group text-primary">Model</label>
+    <div class="form-group">
+      <input
+        id="model"
+        type="text"
+        formControlName="model"
+        class="form-control"
+      />
+    </div>
+    <label for="modelYear" class="form-group text-primary">Year</label>
+    <div class="form-group">
+      <input
+        id="modelYear"
+        type="text"
+        formControlName="modelYear"
+        class="form-control"
+      />
+    </div>
+    <label for="dailyPrice" class="form-group text-primary">Ücret</label>
+    <div class="form-group">
+      <input
+        id="dailyPrice"
+        type="text"
+        formControlName="dailyPrice"
+        class="form-control"
+      />
+    </div>
+    <label for="description" class="form-group text-primary">Açıklama</label>
+    <div class="form-group">
+      <input
+        id="description"
+        type="text"
+        formControlName="description"
+        class="form-control"
+      />
+    </div>
+  </form>
+  <div class="mb-3 mt-3">
+    <button (click)="update()" type="button" class="btn btn-success">
+      Güncelle
+    </button>
+  </div>
+</div>
+
+<div *ngIf="!car && cars" class="mb-3 mt-3">
+  <table class="table">
+    <thead>
+      <th class="text-primary">Marka Id</th>
+      <th class="text-primary">Renk Id</th>
+      <th class="text-primary">Model</th>
+      <th class="text-primary">Yıl</th>
+      <th class="text-primary">Ücret</th>
+      <th class="text-primary">Açıklama</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let car of cars">
+        <td>{{ car.brandId }}</td>
+        <td>{{ car.colorId }}</td>
+        <td>{{ car.model }}</td>
+        <td>{{ car.modelYear }}</td>
+        <td>{{ car.dailyPrice }} ₺</td>
+        <td>{{ car.description }}</td>
+        <td>
+          <button
+            (click)="checkUpdate(car)"
+            type="button"
+            class="btn btn-success"
+          >
+            Güncelle
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="car" class="mb-3 mt-3">
+  <div *ngIf="brands" class="mb-3 mt-3">
+    <table class="table table-striped">
+      <thead>
+        <th class="text-primary">Id</th>
+        <th class="text-primary">Marka</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let brand of brands">
+          <td>{{ brand.id }}</td>
+          <td>{{ brand.name }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="colors" class="mb-3 mt-3">
+    <table class="table table-striped">
+      <thead>
+        <th class="text-primary">Id</th>
+        <th class="text-primary">Renk</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let color of colors">
+          <td>{{ color.id }}</td>
+          <td>{{ color.name }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="text-secondary">Güncellenecek Araba</h3>
+  <table class="table">
+    <thead>
+      <th class="text-primary">Marka Id</th>
+      <th class="text-primary">Renk Id</th>
+      <th class="text-primary">Model</th>
+      <th class="text-primary">Yıl</th>
+      <th class="text-primary">Ücret</th>
+      <th class="text-primary">Açıklama</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ car.brandId }}</td>
+        <td>{{ car.colorId }}</td>
+        <td>{{ car.model }}</td>
+        <td>{{ car.modelYear }}</td>
+        <td>{{ car.dailyPrice }} ₺</td>
+        <td>{{ car.description }} </td>
+      </tr>
+    </tbody>
+  </table>
+  <form [formGroup]="selectedCarUpdateForm">
+    <label for="brandId" class="form-group text-primary">Marka Id</label>
+    <div class="form-group">
+      <input
+        id="brandId"
+        type="text"
+        formControlName="brandId"
+        class="form-control"
+      />
+    </div>
+    <label for="colorId" class="form-group text-primary">Renk Id</label>
+    <div class="form-group">
+      <input
+        id="colorId"
+        type="text"
+        formControlName="colorId"
+        class="form-control"
+      />
+    </div>
+    <label for="model" class="form-group text-primary">Model</label>
+    <div class="form-group">
+      <input
+        id="model"
+        type="text"
+        formControlName="model"
+        class="form-control"
+      />
+    </div>
+    <label for="modelYear" class="form-group text-primary">Year</label>
+    <div class="form-group">
+      <input
+        id="modelYear"
+        type="text"
+        formControlName="modelYear"
+        class="form-control"
+      />
+    </div>
+    <label for="dailyPrice" class="form-group text-primary">Ücret</label>
+    <div class="form-group">
+      <input
+        id="dailyPrice"
+        type="text"
+        formControlName="dailyPrice"
+        class="form-control"
+      />
+    </div>
+    <label for="description" class="form-group text-primary">Açıklama</label>
+    <div class="form-group">
+      <input
+        id="description"
+        type="text"
+        formControlName="description"
+        class="form-control"
+      />
+    </div>
+  </form>
+  <div class="mb-3 mt-3">
+    <button (click)="selectedCarUpdate()" type="button" class="btn btn-success">
+      Güncelle
+    </button>
+  </div>
+</div>
