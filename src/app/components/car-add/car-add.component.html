@@ -1,8 +1,11 @@
 <div *ngIf="brands" class="mb-3 mt-3">
+  <h3 class="text-secondary text-center">MARKALAR</h3>
   <table class="table table-striped">
     <thead>
-      <th class="text-primary">Id</th>
-      <th class="text-primary">Marka</th>
+      <tr>
+        <th class="text-primary">Id</th>
+        <th class="text-primary">Marka</th>
+      </tr>
     </thead>
     <tbody>
       <tr *ngFor="let brand of brands">
@@ -14,10 +17,13 @@
 </div>
 
 <div *ngIf="colors" class="mb-3 mt-3">
+  <h3 class="text-secondary text-center">RENKLER</h3>
   <table class="table table-striped">
     <thead>
-      <th class="text-primary">Id</th>
-      <th class="text-primary">Renk</th>
+      <tr>
+        <th class="text-primary">Id</th>
+        <th class="text-primary">Renk</th>
+      </tr>
     </thead>
     <tbody>
       <tr *ngFor="let color of colors">
@@ -29,6 +35,7 @@
 </div>
 
 <div class="mb-3 mt-3">
+  <h3 class="text-secondary text-center">ARABA EKLEME</h3>
   <form [formGroup]="carAddForm">
     <label for="brandId" class="form-group text-primary">Marka Id</label>
     <div class="form-group">
@@ -87,17 +94,23 @@
   </form>
 </div>
 <div class="mb-3 mt-3">
-    <button (click)="add()" type="button" class="btn btn-success">Ekle</button>
+  <div class="d-grid gap-2">
+  <button (click)="add()" type="button" class="btn btn-success">Ekle</button>
+</div>
 </div>
 
 <div *ngIf="cars" class="mb-3 mt-3">
+    <h3 class="text-secondary text-center">Arabalar</h3>
   <table class="table table-striped">
     <thead>
-      <th class="text-primary">Marka</th>
-      <th class="text-primary">Model</th>
-      <th class="text-primary">Yıl</th>
-      <th class="text-primary">Renk</th>
-      <th class="text-primary">Günlük Ücret</th>
+      <tr>
+        <th class="text-primary">Marka</th>
+        <th class="text-primary">Model</th>
+        <th class="text-primary">Yıl</th>
+        <th class="text-primary">Renk</th>
+        <th class="text-primary">Günlük Ücret</th>
+        <th class="text-primary">Güncelleme</th>
+      </tr>
     </thead>
     <tbody>
       <tr *ngFor="let car of cars">
@@ -106,7 +119,15 @@
         <td>{{ car.modelYear }}</td>
         <td>{{ car.colorName }}</td>
         <td>{{ car.dailyPrice }} ₺</td>
-        <td><button routerLink="/car/update/{{car.id}}" type="button" class="btn btn-success">Güncelle</button></td>
+        <td>
+          <button
+            routerLink="/car/update/{{ car.id }}"
+            type="button"
+            class="btn btn-success"
+          >
+            Güncelle
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>

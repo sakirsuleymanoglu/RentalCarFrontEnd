@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Car } from 'src/app/models/car';
 import { CarDto } from 'src/app/models/carDto';
+import { CarImage } from 'src/app/models/carImage';
 import { CarService } from 'src/app/services/car.service';
+import { CarImageService } from 'src/app/services/carImage.service.';
 
 @Component({
   selector: 'app-car',
@@ -18,10 +20,18 @@ export class CarComponent implements OnInit {
   filterByModel:string;
   filterByModelYear:string;
   filterByColor:string;
+  firstCarImage:CarImage;
+  defaultCarImage:CarImage={
+    carId:0,
+    imagePath :'default.jpg',
+    date :"",
+    id:0
+  }
 
   constructor(
     private carService: CarService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private carImageService:CarImageService
   ) {}
 
   ngOnInit(): void {
@@ -64,11 +74,7 @@ export class CarComponent implements OnInit {
     this.currentCar = car;
   }
 
-  setVisible(){
-    if(!this.selectedOptionValue){
-      return "invisible"
-    }
-    return "visible"
+  getImage(imagePath:string){
+    return this.carImageService.getImage(imagePath);
   }
-
 }

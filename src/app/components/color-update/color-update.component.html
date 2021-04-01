@@ -11,16 +11,21 @@
       </div>
     </form>
     <div class="mb-3 mt-3">
+      <div class="d-grid gap-2">
       <button (click)="update()" type="button" class="btn btn-success">
         Güncelle
       </button>
     </div>
+    </div>
   </div>
   
   <div *ngIf="!color && colors" class="mb-3 mt-3">
-    <table class="table">
+    <table class="table table-striped">
       <thead>
-        <th class="text-primary">Renk</th>
+        <tr>
+          <th class="text-primary">Renk</th>
+          <th class="text-primary">Güncelleme</th>
+        </tr> 
       </thead>
       <tbody>
         <tr *ngFor="let color of colors">
@@ -40,8 +45,8 @@
   </div>
   
   <div *ngIf="color" class="mb-3 mt-3">
-      <h3>Güncellenecek Marka</h3>
-      <p>{{color.name}}</p>
+      <h3 class="text-secondary">GÜNCELLENECEK RENK</h3>
+      <p class="text-danger fw-bolder">{{color.name}}</p>
       <form [formGroup]="selectedColorUpdateForm">
           <label for="name" class="form-group text-primary">Renk Adı</label>
           <div class="form-group">
@@ -54,8 +59,10 @@
           </div>
         </form>
         <div class="mb-3 mt-3">
-          <button (click)="selectedColorUpdate()" type="button" class="btn btn-success">
-            Güncelle
-          </button>
+          <div class="d-grid gap-2">
+            <button (click)="selectedColorUpdate()" type="button" class="btn btn-success">
+              Güncelle
+            </button>
+          </div>  
         </div>
   </div>

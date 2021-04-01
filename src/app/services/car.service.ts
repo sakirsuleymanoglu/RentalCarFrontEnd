@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Car } from '../models/car';
 import { CarDto } from '../models/carDto';
+import { CarImage } from '../models/carImage';
 import { ListResponseModel } from '../models/listResponseModel';
 import { ResponseModel } from '../models/responseModel';
 import { SingleResponseModel } from '../models/singleResponseModel';
@@ -59,6 +60,11 @@ export class CarService {
   update(car:Car):Observable<ResponseModel>{
     let newPath = this.apiUrl + 'Cars/update';
     return this.httpClient.post<ResponseModel>(newPath, car);
+  }
+
+  getFirstImage(carId:number):Observable<SingleResponseModel<CarImage>>{
+    let newPath = this.apiUrl + 'Cars/getfirstimagebycar';
+    return this.httpClient.get<SingleResponseModel<CarImage>>(newPath);
   }
 
 }

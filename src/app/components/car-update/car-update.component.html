@@ -1,4 +1,5 @@
 <div *ngIf="isUpdate" class="mb-3 mt-3">
+  <h3 class="text-secondary text-center">ARABA GÜNCELLEME</h3>
   <form [formGroup]="carUpdateForm">
     <label for="brandId" class="form-group text-primary">Marka Id</label>
     <div class="form-group">
@@ -56,21 +57,27 @@
     </div>
   </form>
   <div class="mb-3 mt-3">
+    <div class="d-grid gap-2">
     <button (click)="update()" type="button" class="btn btn-success">
       Güncelle
     </button>
   </div>
+  </div>
 </div>
 
 <div *ngIf="!car && cars" class="mb-3 mt-3">
-  <table class="table">
+  <h3 class="text-secondary text-center">ARABALAR</h3>
+  <table class="table table-striped">
     <thead>
-      <th class="text-primary">Marka Id</th>
-      <th class="text-primary">Renk Id</th>
-      <th class="text-primary">Model</th>
-      <th class="text-primary">Yıl</th>
-      <th class="text-primary">Ücret</th>
-      <th class="text-primary">Açıklama</th>
+      <tr>
+        <th class="text-primary">Marka Id</th>
+        <th class="text-primary">Renk Id</th>
+        <th class="text-primary">Model</th>
+        <th class="text-primary">Yıl</th>
+        <th class="text-primary">Ücret</th>
+        <th class="text-primary">Açıklama</th>
+        <th class="text-primary">Güncelleme</th>
+      </tr>
     </thead>
     <tbody>
       <tr *ngFor="let car of cars">
@@ -80,7 +87,7 @@
         <td>{{ car.modelYear }}</td>
         <td>{{ car.dailyPrice }} ₺</td>
         <td>{{ car.description }}</td>
-        <td>
+        <td>      
           <button
             (click)="checkUpdate(car)"
             type="button"
@@ -96,6 +103,7 @@
 
 <div *ngIf="car" class="mb-3 mt-3">
   <div *ngIf="brands" class="mb-3 mt-3">
+    <h3 class="text-secondary text-center">MARKALAR</h3>
     <table class="table table-striped">
       <thead>
         <th class="text-primary">Id</th>
@@ -111,6 +119,7 @@
   </div>
 
   <div *ngIf="colors" class="mb-3 mt-3">
+    <h3 class="text-secondary text-center">RENKLER</h3>
     <table class="table table-striped">
       <thead>
         <th class="text-primary">Id</th>
@@ -125,15 +134,18 @@
     </table>
   </div>
 
-  <h3 class="text-secondary">Güncellenecek Araba</h3>
-  <table class="table">
+
+  <h3 class="text-secondary text-center">GÜNCELLENECEK ARABA</h3>
+  <table class="table table-striped">
     <thead>
-      <th class="text-primary">Marka Id</th>
-      <th class="text-primary">Renk Id</th>
-      <th class="text-primary">Model</th>
-      <th class="text-primary">Yıl</th>
-      <th class="text-primary">Ücret</th>
-      <th class="text-primary">Açıklama</th>
+      <tr>
+        <th class="text-primary">Marka Id</th>
+        <th class="text-primary">Renk Id</th>
+        <th class="text-primary">Model</th>
+        <th class="text-primary">Yıl</th>
+        <th class="text-primary">Ücret</th>
+        <th class="text-primary">Açıklama</th>
+      </tr>
     </thead>
     <tbody>
       <tr>
@@ -142,10 +154,13 @@
         <td>{{ car.model }}</td>
         <td>{{ car.modelYear }}</td>
         <td>{{ car.dailyPrice }} ₺</td>
-        <td>{{ car.description }} </td>
+        <td>{{ car.description }}</td>
       </tr>
     </tbody>
   </table>
+
+
+  <h3 class="text-secondary text-center">ARABA GÜNCELLEME</h3>
   <form [formGroup]="selectedCarUpdateForm">
     <label for="brandId" class="form-group text-primary">Marka Id</label>
     <div class="form-group">
@@ -203,8 +218,10 @@
     </div>
   </form>
   <div class="mb-3 mt-3">
+    <div class="d-grid gap-2">
     <button (click)="selectedCarUpdate()" type="button" class="btn btn-success">
       Güncelle
     </button>
+  </div>
   </div>
 </div>

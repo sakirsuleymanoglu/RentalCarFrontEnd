@@ -3,9 +3,12 @@
     <button (click) = 'deList()' type="button" class="btn btn-danger ms-3">Renkleri Gizle</button>
 </div>
 <div *ngIf="colors" class="mb-3 mt-3">
-    <table class="table">
+    <table class="table table-striped">
         <thead>
-            <th>Renk</th>
+            <tr>
+                <th>Renk</th>
+                <th>Güncelleme</th>
+            </tr>
         </thead>
         <tbody>
             <tr *ngFor="let color of colors">
@@ -30,5 +33,7 @@
     </form>
 </div>
 <div class="mb-3 mt-3">
+    <div class="d-grid gap-2">
     <button (click)='add()' type="button" class="btn btn-primary">Ekle</button>
+</div>
 </div>

@@ -1,67 +1,66 @@
 <div class="mb-3 mt-3">
   <h6 class="text-primary">Ara</h6>
-<select class="form-select" [(ngModel)]="selectedOptionValue">
-  <option value="brand">Markaya göre ara</option>
-  <option value="model">Modele göre ara</option>
-  <option value="modelYear">Yıla göre ara</option>
-  <option value="color">Renge göre ara</option>
-</select>
+  <select class="form-select" [(ngModel)]="selectedOptionValue">
+    <option value="brand">Markaya göre ara</option>
+    <option value="model">Modele göre ara</option>
+    <option value="modelYear">Yıla göre ara</option>
+    <option value="color">Renge göre ara</option>
+  </select>
 
-<div lass="mb-3 mt-3">
-  <div *ngIf="selectedOptionValue ==='brand'" class="mb-3 mt-3">
-    <input type="search" [(ngModel)]="filterByBrandName" class="form-control" />
-  </div>
+  <div lass="mb-3 mt-3">
+    <div *ngIf="selectedOptionValue === 'brand'" class="mb-3 mt-3">
+      <input
+        type="search"
+        [(ngModel)]="filterByBrandName"
+        class="form-control"
+      />
+    </div>
 
-  <div *ngIf="selectedOptionValue ==='model'" class="mb-3 mt-3">
-    <input type="search" [(ngModel)]="filterByModel" class="form-control" />
-  </div>
+    <div *ngIf="selectedOptionValue === 'model'" class="mb-3 mt-3">
+      <input type="search" [(ngModel)]="filterByModel" class="form-control" />
+    </div>
 
-  <div *ngIf="selectedOptionValue ==='modelYear'" class="mb-3 mt-3">
-    <input type="search" [(ngModel)]="filterByModelYear" class="form-control" />
-  </div>
+    <div *ngIf="selectedOptionValue === 'modelYear'" class="mb-3 mt-3">
+      <input
+        type="search"
+        [(ngModel)]="filterByModelYear"
+        class="form-control"
+      />
+    </div>
 
-  <div *ngIf="selectedOptionValue ==='color'" class="mb-3 mt-3">
-    <input type="search" [(ngModel)]="filterByColor" class="form-control" />
+    <div *ngIf="selectedOptionValue === 'color'" class="mb-3 mt-3">
+      <input type="search" [(ngModel)]="filterByColor" class="form-control" />
+    </div>
   </div>
 </div>
-  <div class="mb-3 mt-3 bg-dark">
-    <table class="table table-dark table-striped">
-      <thead>
-        <tr>
-          <th>Marka</th>
-          <th>Model</th>
-          <th>Yıl</th>
-          <th>Renk</th>
-          <th>Günlük Fiyat</th>
-          <th>Detay</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let car of carsDto | filter: filterByBrandName:filterByModel:filterByModelYear:filterByColor">
-          <td>
-            {{ car.brandName }}
-          </td>
-          <td>
-            {{ car.model }}
-          </td>
-          <td>
-            {{ car.modelYear }}
-          </td>
-          <td>
-            {{ car.colorName }}
-          </td>
-          <td>{{ car.dailyPrice }} ₺</td>
-          <td>
-            <button
-              routerLink="/cars/car/{{ car.id }}"
-              (click)="setCurrentCar(car)"
-              class="btn btn-primary"
-            >
-              Detaya Git
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+
+<div
+  *ngFor="
+    let car of carsDto
+      | filter: filterByBrandName:filterByModel:filterByModelYear:filterByColor
+  "
+  class="card mb-3"
+>
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img [src]="getImage('default.jpg')" width="200px" alt="..." />
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">Rental Car</h5>
+        <p class="card-text">
+          {{ car.brandName }} {{ car.model }} {{ car.modelYear }}
+          {{ car.colorName }}
+        </p>
+        <p class="card-text fw-bolder">{{ car.dailyPrice }} ₺</p>
+        <button
+          routerLink="/cars/car/{{ car.id }}"
+          (click)="setCurrentCar(car)"
+          class="btn btn-primary"
+        >
+          Detaya Git
+        </button>
+      </div>
+    </div>
   </div>
 </div>
