@@ -5,6 +5,7 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { Brand } from 'src/app/models/brand';
 import { BrandService } from 'src/app/services/brand.service';
 
@@ -21,7 +22,8 @@ export class BrandAddComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private brandService: BrandService
+    private brandService: BrandService,
+    private toastrService: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -38,7 +40,10 @@ export class BrandAddComponent implements OnInit {
     if (this.brandAddForm.valid) {
       this.brand = Object.assign({}, this.brandAddForm.value);
       this.brandService.add(this.brand).subscribe((response) => {
-        this.list();
+        if(response.success){
+          this.toastrService.success("Eklendi", "Marka Ekleme");
+          this.list();
+        } 
       });
     }
   }
@@ -52,5 +57,6 @@ export class BrandAddComponent implements OnInit {
 
   deList(){
     this.brands = this.emptyBrands;
+    this.toastrService.success("Eklendi", "Marka Ekleme");
   }
 }
