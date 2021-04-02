@@ -61,10 +61,4 @@ export class CarService {
     let newPath = this.apiUrl + 'Cars/update';
     return this.httpClient.post<ResponseModel>(newPath, car);
   }
-
-  getFirstImage(carId:number):Observable<SingleResponseModel<CarImage>>{
-    let newPath = this.apiUrl + 'Cars/getfirstimagebycar';
-    return this.httpClient.get<SingleResponseModel<CarImage>>(newPath);
-  }
-
 }
