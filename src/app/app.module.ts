@@ -28,6 +28,7 @@ import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { UserUpdateComponent } from './components/user-update/user-update.component';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { FooterComponent } from './components/footer/footer.component';
     LogoutComponent,
     AdminComponent,
     FooterComponent,
+    UserUpdateComponent,
   ],
   imports: [
     BrowserModule,

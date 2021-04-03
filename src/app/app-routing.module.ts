@@ -15,6 +15,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { PaymentComponent } from './components/payment/payment.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RentalAddComponent } from './components/rental-add/rental-add.component';
+import { UserUpdateComponent } from './components/user-update/user-update.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: CarComponent },
@@ -41,6 +42,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'admin', component: AdminComponent },
+  { path: 'user/update', component: UserUpdateComponent },
 ];
 
 @NgModule({
