@@ -25,6 +25,7 @@ import { BrandUpdateComponent } from './components/brand-update/brand-update.com
 import { ColorUpdateComponent } from './components/color-update/color-update.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { LoginComponent } from './components/login/login.component';
     ColorUpdateComponent,
     RegisterComponent,
     LoginComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,8 +59,8 @@ import { LoginComponent } from './components/login/login.component';
     FormsModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
-      positionClass:"toast-bottom-right"
-    })
+      positionClass: 'toast-bottom-right',
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

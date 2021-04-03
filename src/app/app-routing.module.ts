@@ -13,6 +13,9 @@ import { ColorAddComponent } from './components/color-add/color-add.component';
 
 import { ColorUpdateComponent } from './components/color-update/color-update.component';
 import { LoginComponent } from './components/login/login.component';
+import { LogoutComponent } from './components/logout/logout.component';
+import { NaviComponent } from './components/navi/navi.component';
+
 import { PaymentComponent } from './components/payment/payment.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RentalAddComponent } from './components/rental-add/rental-add.component';
@@ -47,6 +50,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
 
   { path: 'login', component: LoginComponent },
+
+  { path: 'logout', component: LogoutComponent },
 ];
 
 @NgModule({

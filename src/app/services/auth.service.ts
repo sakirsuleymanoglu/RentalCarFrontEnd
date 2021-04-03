@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { SingleResponseModel } from '../models/singleResponseModel';
 import { Token } from '../models/token';
 import { UserForLoginDto } from '../models/userForLoginDto';
+import { UserForRegisterDto } from '../models/userForRegisterDto';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +22,23 @@ export class AuthService {
     return this.httpClient.post<SingleResponseModel<Token>>(
       loginPath,
       userForLoginDto
+    );
+  }
+
+  isAuthenticated() {
+    if(localStorage.getItem('token')){
+      return true;
+    }
+    return false;
+  }
+
+  register(
+    userForRegisterDto: UserForRegisterDto
+  ): Observable<SingleResponseModel<UserForRegisterDto>> {
+    let registerPath = this.apiUrl + 'Auths/register';
+    return this.httpClient.post<SingleResponseModel<UserForRegisterDto>>(
+      registerPath,
+      userForRegisterDto
     );
   }
 }

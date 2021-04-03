@@ -1,6 +1,7 @@
 <div class="card mb-3 mt-3">
-    <div class="card-header">
-        <h5 class="card-text text-secondary">KAYIT OL</h5></div>
+  <div class="card-header">
+    <h5 class="card-text text-secondary">KAYIT OL</h5>
+  </div>
   <form [formGroup]="registerForm">
     <div class="mb-3 mt-3 ms-3 me-3">
       <label for="firstName" class="form-label">Adınız</label>
@@ -21,27 +22,29 @@
       />
     </div>
     <div class="mb-3 mt-3 ms-3 me-3">
-        <label for="email" class="form-label">E-Posta</label>
-        <input
-          type="email"
-          class="form-control"
-          id="email"
-          formControlName="email"
-        />
-      </div>
+      <label for="email" class="form-label">E-Posta</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        formControlName="email"
+      />
+    </div>
+    <div class="mb-3 mt-3 ms-3 me-3">
+      <label for="password" class="form-label">Parola</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        formControlName="password"
+      />
+    </div>
+    <div class="card-footer">
       <div class="mb-3 mt-3 ms-3 me-3">
-        <label for="password" class="form-label">Parola</label>
-        <input
-          type="password"
-          class="form-control"
-          id="password"
-          formControlName="password"
-        />
+        <div class="d-grid gap-2">
+          <button (click)= "register()" type="submit" class="btn btn-primary">Kayıt Ol</button>
+        </div>
       </div>
-      <div class="mb-3 mt-3 ms-3 me-3">
-          <div class="d-grid gap-2">
-            <button type="submit" class="btn btn-primary">Kayıt Ol</button>
-          </div>  
-      </div>
+    </div>
   </form>
 </div>

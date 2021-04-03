@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Car } from 'src/app/models/car';
 import { CarDto } from 'src/app/models/carDto';
 import { CarImage } from 'src/app/models/carImage';
