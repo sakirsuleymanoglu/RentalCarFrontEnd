@@ -41,7 +41,7 @@ export class BrandAddComponent implements OnInit {
       this.brand = Object.assign({}, this.brandAddForm.value);
       this.brandService.add(this.brand).subscribe((response) => {
         if(response.success){
-          this.toastrService.success("Eklendi", "Marka Ekleme");
+          this.toastrService.success(response.message, "Marka");
           this.list();
         } 
       });
@@ -57,6 +57,5 @@ export class BrandAddComponent implements OnInit {
 
   deList(){
     this.brands = this.emptyBrands;
-    this.toastrService.success("Eklendi", "Marka Ekleme");
   }
 }

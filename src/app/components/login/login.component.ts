@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { OperationClaim } from 'src/app/models/operationClaim';
+import { User } from 'src/app/models/user';
+import { UserForLoginDto } from 'src/app/models/userForLoginDto';
 import { AuthService } from 'src/app/services/auth.service';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -12,17 +14,23 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  user: User;
+  operationClaims: OperationClaim[];
+  userForLoginDto: UserForLoginDto;
+  mail:string;
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private toastrService: ToastrService,
-    private router:Router,
-    private localStorageService:LocalStorageService
+    private router: Router,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
     this.createLoginForm();
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['/']);
+    }
   }
 
   createLoginForm() {
@@ -34,11 +42,21 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.loginForm.valid) {
-      let userForLoginDto = Object.assign({}, this.loginForm.value);
-      this.authService.login(userForLoginDto).subscribe((response)=>{
+      this.userForLoginDto = Object.assign({}, this.loginForm.value);
+      this.mail = this.userForLoginDto.email;
+      this.getUserByMail(this.mail);
+      this.authService.login(this.userForLoginDto).subscribe((response) => {
         localStorage.setItem('token', response.data.token);
-        this.router.navigate(['/']);
+        localStorage.setItem('fullName', this.user.firstName + ' ' + this.user.lastName);
+        localStorage.setItem('userId', this.user.id.toString());
+        window.location.reload();
       });
     }
+  }
+
+  getUserByMail(mail:string){
+    this.userService.getUserByEMail(mail).subscribe((response)=>{
+      this.user = response.data;
+    })
   }
 }

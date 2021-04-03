@@ -20,6 +20,9 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.createRegisterForm();
+    if(this.authService.isAuthenticated()){
+      this.router.navigate(['/']);
+    }
   }
 
   createRegisterForm() {

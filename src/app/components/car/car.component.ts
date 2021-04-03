@@ -13,21 +13,14 @@ import { CarImageService } from 'src/app/services/carImage.service.';
 })
 export class CarComponent implements OnInit {
   cars: Car[] = [];
-  carsDto: CarDto[] = [];
+  carsDto: CarDto[];
   currentCar: CarDto;
   selectedOptionValue:string;
   filterByBrandName:string;
   filterByModel:string;
   filterByModelYear:string;
   filterByColor:string;
-  firstCarImage:CarImage;
-  defaultCarImage:CarImage={
-    carId:0,
-    imagePath :'default.jpg',
-    date :"",
-    id:0
-  }
-
+ 
   constructor(
     private carService: CarService,
     private activatedRoute: ActivatedRoute,

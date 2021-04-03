@@ -1,18 +1,15 @@
-<div class="mt-3">
-  <h6 class="text-primary">Marka</h6>
-  <select class="form-select" [(ngModel)]="selectedBrand">
-    <option *ngFor="let brand of brands" [ngValue]="brand">
+<div class="mt-3 mb-3">
+  <ul class="list-group">
+    <li routerLink="/cars" class="list-group-item bg-danger text-light">
+      Tüm Arabalar
+    </li>
+    <li
+      routerLink="cars/brand/{{ brand.id }}"
+      (click)="setCurrentBrand(brand)"
+      *ngFor="let brand of brands"
+      class="list-group-item bg-light"
+    >
       {{ brand.name }}
-    </option>
-  </select>
-  <button
-    routerLink="/cars/brand/{{ selectedBrand.id }}"
-    type="button"
-    class="btn btn-secondary mt-3"
-  >
-    Filtrele
-  </button>
-  <button routerLink="/" type="button" class="btn btn-secondary mt-3 ms-3">
-    Filtreyi Temizle
-  </button>
+    </li>
+  </ul>
 </div>

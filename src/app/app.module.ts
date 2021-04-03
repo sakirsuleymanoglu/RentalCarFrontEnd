@@ -26,6 +26,8 @@ import { ColorUpdateComponent } from './components/color-update/color-update.com
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 @NgModule({
@@ -50,6 +52,8 @@ import { LogoutComponent } from './components/logout/logout.component';
     RegisterComponent,
     LoginComponent,
     LogoutComponent,
+    AdminComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
