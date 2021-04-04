@@ -6,6 +6,7 @@ import { OperationClaim } from 'src/app/models/operationClaim';
 import { User } from 'src/app/models/user';
 import { UserForLoginDto } from 'src/app/models/userForLoginDto';
 import { AuthService } from 'src/app/services/auth.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -25,7 +26,8 @@ export class LoginComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private userService: UserService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private localStorageService:LocalStorageService
   ) {}
 
   ngOnInit(): void {
@@ -49,12 +51,9 @@ export class LoginComponent implements OnInit {
       this.getUserByMail(this.mail);
       this.authService.login(this.userForLoginDto).subscribe(
         (response) => {
-          localStorage.setItem('token', response.data.token);
-          localStorage.setItem(
-            'fullName',
-            this.user.firstName + ' ' + this.user.lastName
-          );
-          localStorage.setItem('userId', this.user.id.toString());
+          this.localStorageService.add('token', response.data.token);
+          this.localStorageService.add('fullName', (this.user.firstName + ' ' + this.user.lastName));
+          this.localStorageService.add('userId', this.user.id);
           this.toastrService.success(response.message, 'Giriş Yap');
           window.location.reload();
         },

@@ -35,18 +35,18 @@ export class NaviComponent implements OnInit {
   }
 
   logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('fullName');
-    localStorage.removeItem('userId');
+    this.localStorageService.delete('token');
+    this.localStorageService.delete('fullName');
+    this.localStorageService.delete('userId');
     this.isAuthenticated = false;
   }
 
   setUserFullName() {
-    this.userFullName = localStorage.getItem('fullName');
+    this.userFullName = this.localStorageService.get('fullName');
   }
 
   getUserId() {
-    this.userId = localStorage.getItem('userId');
+    this.userId = this.localStorageService.get('userId');
   }
 
   CheckIfIsAdmin(){

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -10,10 +11,12 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class AdminComponent implements OnInit {
 
-  constructor(private authService:AuthService, private userService:UserService, private router:Router) { }
+  constructor(private authService:AuthService,
+    private localStorageService:LocalStorageService,
+    private userService:UserService, private router:Router) { }
 
   ngOnInit(): void {
-    let userId:any = localStorage.getItem('userId');
+    let userId:any = localStorage.get('userId');
     if(this.authService.isAuthenticated()){
       this.userService.CheckIfIsAdmin(userId).subscribe((response)=>{
         if(!response.success){
