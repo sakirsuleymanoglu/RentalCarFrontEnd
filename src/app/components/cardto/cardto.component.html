@@ -1,26 +1,48 @@
-<div class="mb-3">
-  <div *ngFor="let image of car.images" class="card bg-dark text-white mt-3">
-    <img [src]="getImage(image.imagePath)" class="card-img" alt="..." />
-    <div class="card-img-overlay">
-      <h5 class="card-title">
-        {{ car.brandName }} {{ car.model }} {{ car.modelYear }}
-        {{ car.colorName }}
-      </h5>
+<div class="card mb-3 mt-3">
+  <div class="card-header">
+    <h5 class="card-title">Detaylar</h5>
+  </div>
+  <div class="card-body text-center">
+    <p class="card-text">
+      <span class="text-muted">Marka:</span> {{ car.brandName }}
+    </p>
+    <p class="card-text">
+      <span class="text-muted">Model:</span> {{ car.model }}
+    </p>
+    <p class="card-text">
+      <span class="text-muted">Yıl:</span> {{ car.modelYear }}
+    </p>
+    <p class="card-text">
+      <span class="text-muted">Renk:</span> {{ car.colorName }}
+    </p>
+    <p class="card-text">
+      <span class="text-muted">Günlük Ücret: </span> {{ car.dailyPrice }} ₺
+    </p>
+    <div class="d-grid gap-2">
+      <button
+        routerLink="/cars/car/{{ car.id }}//rental/add"
+        type="button"
+        class="btn btn-primary"
+      >
+        Kirala
+      </button>
     </div>
   </div>
 </div>
 
-<div class="card text-center">
-  <div class="card-header">Detaylar</div>
+<div class="card mb-3 mt-3">
+  <div class="card-header">
+    <h5 class="card-title">Resimler</h5>
+  </div>
   <div class="card-body">
-    <h3 class="card-title"> {{ car.brandName }} {{ car.model }} {{ car.modelYear }}
-      {{ car.colorName }}</h3>
-    <h4 class="card-title">{{ car.dailyPrice }} ₺</h4>
-    <p class="card-text">Marka : {{ car.brandName }}</p>
-    <p class="card-text">Model : {{ car.model }}</p>
-    <p class="card-text">Yıl : {{ car.modelYear }}</p>
-    <p class="card-text">Renk : {{ car.colorName }}</p>
-    <button 
-    routerLink="/cars/car/{{car.id}}//rental/add" type="button" class="btn btn-primary">Kirala</button>
+    <table>
+      <tbody>
+        <tr *ngFor="let image of car.images">
+          <td>
+            <img [src]="getImage(image.imagePath)" class="card-img" />
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

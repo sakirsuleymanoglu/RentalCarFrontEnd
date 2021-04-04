@@ -1,27 +1,41 @@
-<div class="mb-3 mt-3">
-    <button (click) = 'list()' type="button" class="btn btn-success">Renkleri Göster</button>
-    <button (click) = 'deList()' type="button" class="btn btn-danger ms-3">Renkleri Gizle</button>
-</div>
-<div *ngIf="colors" class="mb-3 mt-3">
-    <table class="table table-striped">
+<div class="card mb-3 mt-3">
+  <div class="card-header">
+    <h5 class="card-title">Renk Ekle</h5>
+  </div>
+  <div class="card-body">
+    <button (click)="list()" type="button" class="btn btn-success">
+      Renkleri Göster
+    </button>
+    <button (click)="deList()" type="button" class="btn btn-danger ms-3">
+      Renkleri Gizle
+    </button>
+    <div *ngIf="colors" class="mb-3 mt-3">
+      <table class="table table-light table-striped">
         <thead>
-            <tr>
-                <th>Renk</th>
-                <th>Güncelleme</th>
-            </tr>
+          <tr>
+            <th class="text-muted">Renk</th>
+            <th></th>
+          </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let color of colors">
-                <td>{{color.name}}</td>
-                <td><button routerLink="/color/update/{{color.id}}" type="button" class="btn btn-success">Güncelle</button></td>
-            </tr>
+          <tr *ngFor="let color of colors">
+            <td>{{ color.name }}</td>
+            <td>
+              <button
+                routerLink="/color/update/{{ color.id }}"
+                type="button"
+                class="btn btn-success"
+              >
+                Güncelle
+              </button>
+            </td>
+          </tr>
         </tbody>
-    </table>
-</div>
-
-<div class="mb-3 mt-3">
-    <form [formGroup]="colorAddForm">
-        <label for="name" class="form-group text-primary">Renk Adı</label>
+      </table>
+    </div>
+    <div class="mb-3 mt-3">
+      <form [formGroup]="colorAddForm">
+        <label for="name" class="form-group">Renk Adı</label>
         <div class="form-group">
           <input
             id="name"
@@ -30,10 +44,12 @@
             class="form-control"
           />
         </div>
-    </form>
-</div>
-<div class="mb-3 mt-3">
-    <div class="d-grid gap-2">
-    <button (click)='add()' type="button" class="btn btn-primary">Ekle</button>
-</div>
+        <div class="d-grid gap-2 mb-3 mt-3">
+          <button (click)="add()" type="button" class="btn btn-primary">
+            Ekle
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>

@@ -1,18 +1,15 @@
-<div class="mt-3">
-  <h6 class="text-primary">Renk</h6>
-  <select class="form-select" [(ngModel)]="selectedColor">
-    <option *ngFor="let color of colors" [ngValue]="color">
+<div class="mt-3 mb-3">
+  <ul *ngIf="colors" class="list-group">
+    <li routerLink="/cars" class="list-group-item bg-danger text-light">
+      Tüm Arabalar
+    </li>
+    <li
+      routerLink="cars/color/{{ color.id }}"
+      (click)="setCurrentColor(color)"
+      *ngFor="let color of colors"
+      class="list-group-item bg-light"
+    >
       {{ color.name }}
-    </option>
-  </select>
-  <button
-    routerLink="/cars/color/{{ selectedColor.id }}"
-    type="button"
-    class="btn btn-secondary mt-3"
-  >
-    Filtrele
-  </button>
-  <button routerLink="/" type="button" class="btn btn-secondary mt-3 ms-3">
-    Filtreyi Temizle
-  </button>
+    </li>
+  </ul>
 </div>

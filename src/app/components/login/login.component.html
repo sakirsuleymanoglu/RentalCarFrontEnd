@@ -1,32 +1,36 @@
 <div class="card mb-3 mt-3">
   <div class="card-header">
-    <h5 class="card-text text-secondary">GİRİŞ YAP</h5>
+    <h5 class="card-title text-secondary">GİRİŞ YAP</h5>
   </div>
-  <form [formGroup]="loginForm">
-    <div class="mb-3 mt-3 ms-3 me-3">
-      <label for="email" class="form-label">E-Posta</label>
-      <input
-        type="email"
-        class="form-control"
-        id="email"
-        formControlName="email"
-      />
-    </div>
-    <div class="mb-3 mt-3 ms-3 me-3">
-      <label for="password" class="form-label">Parola</label>
-      <input
-        type="password"
-        class="form-control"
-        id="password"
-        formControlName="password"
-      />
-    </div>
-    <div class="card-footer">
+  <div class="card-body">
+    <form [formGroup]="loginForm">
       <div class="mb-3 mt-3 ms-3 me-3">
-        <div class="d-grid gap-2">
-          <button (click)="login()" type="submit" class="btn btn-primary">Giriş Yap</button>
+        <label for="email" class="form-label">E-Posta</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          formControlName="email"
+        />
+      </div>
+      <div class="mb-3 mt-3 ms-3 me-3">
+        <label for="password" class="form-label">Parola</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          formControlName="password"
+        />
+      </div>
+      <div class="card-footer">
+        <div class="mb-3 mt-3 ms-3 me-3">
+          <div class="d-grid gap-2">
+            <button (click)="login()" type="submit" class="btn btn-primary">
+              Giriş Yap
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>

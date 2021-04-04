@@ -53,25 +53,21 @@ export class BrandAddComponent implements OnInit {
         }
       );
     } else {
-      this.toastrService.error(this.messagesService.notNullMessage, 'Marka Ekleme');
+      this.toastrService.error(
+        this.messagesService.notNullMessage,
+        'Marka Ekleme'
+      );
     }
   }
 
   list() {
-    this.brandService.getBrands().subscribe(
-      (response) => {
-        this.toastrService.success(response.message, 'Marka Ekleme');
-        this.brands = response.data;
-        return this.brands;
-      },
-      (responseError) => {
-        this.toastrService.error(responseError.errr.message, 'Marka Ekleme');
-      }
-    );
+    this.brandService.getBrands().subscribe((response) => {
+      this.brands = response.data;
+      return this.brands;
+    });
   }
 
   deList() {
     this.brands = this.emptyBrands;
-    this.toastrService.success('Markalar gizlendi', 'Marka Ekleme');
   }
 }

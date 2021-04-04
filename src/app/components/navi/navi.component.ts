@@ -27,11 +27,11 @@ export class NaviComponent implements OnInit {
 
   ngOnInit(): void {
     this.isAuthenticated = this.authService.isAuthenticated();
-    if(this.isAuthenticated){
+    if (this.isAuthenticated) {
       this.setUserFullName();
       this.getUserId();
       this.CheckIfIsAdmin();
-    } 
+    }
   }
 
   logout() {
@@ -49,11 +49,9 @@ export class NaviComponent implements OnInit {
     this.userId = this.localStorageService.get('userId');
   }
 
-  CheckIfIsAdmin(){
-    this.userService.CheckIfIsAdmin(this.userId).subscribe((response)=>{
+  CheckIfIsAdmin() {
+    this.userService.CheckIfIsAdmin(this.userId).subscribe((response) => {
       this.isAdmin = response.success;
     });
   }
-
- 
 }

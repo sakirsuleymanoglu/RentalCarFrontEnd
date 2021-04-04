@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Brand } from 'src/app/models/brand';
 import { Car } from 'src/app/models/car';
 import { Color } from 'src/app/models/color';
 import { BrandService } from 'src/app/services/brand.service';
 import { CarService } from 'src/app/services/car.service';
 import { ColorService } from 'src/app/services/color.service';
+import { MessagesService } from 'src/app/services/messages.service';
 
 @Component({
   selector: 'app-car-update',
@@ -29,7 +31,9 @@ export class CarUpdateComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private brandService: BrandService,
-    private colorService: ColorService
+    private colorService: ColorService,
+    private messagesService: MessagesService,
+    private toastrService: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -89,11 +93,24 @@ export class CarUpdateComponent implements OnInit {
         this.updatedCar.modelYear = this.formCarData.modelYear;
         this.updatedCar.dailyPrice = this.formCarData.dailyPrice;
         this.updatedCar.description = this.formCarData.description;
-        this.carService.update(this.updatedCar).subscribe((response) => {
-          this.list();
-          alert('Güncellendi');
-        });
+        this.carService.update(this.updatedCar).subscribe(
+          (response) => {
+            this.toastrService.success(response.message, 'Araba Güncelleme');
+            this.list();
+          },
+          (responseError) => {
+            this.toastrService.error(
+              responseError.error.message,
+              'Araba Güncelleme'
+            );
+          }
+        );
       });
+    } else {
+      this.toastrService.error(
+        this.messagesService.notNullMessage,
+        'Araba Güncelleme'
+      );
     }
   }
 
@@ -115,9 +132,22 @@ export class CarUpdateComponent implements OnInit {
       this.car.modelYear = this.formSelectedCarData.modelYear;
       this.car.dailyPrice = this.formSelectedCarData.dailyPrice;
       this.car.description = this.formSelectedCarData.description;
-      this.carService.update(this.car).subscribe((response) => {
-        alert('Güncellendi');
-      });
+      this.carService.update(this.car).subscribe(
+        (response) => {
+          this.toastrService.success(response.message, 'Araba Güncelleme');
+        },
+        (responseError) => {
+          this.toastrService.error(
+            responseError.error.message,
+            'Araba Güncelleme'
+          );
+        }
+      );
+    } else {
+      this.toastrService.error(
+        this.messagesService.notNullMessage,
+        'Araba Güncelleme'
+      );
     }
   }
 

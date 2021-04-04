@@ -1,134 +1,150 @@
-<div *ngIf="brands" class="mb-3 mt-3">
-  <h3 class="text-secondary text-center">MARKALAR</h3>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th class="text-primary">Id</th>
-        <th class="text-primary">Marka</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let brand of brands">
-        <td>{{ brand.id }}</td>
-        <td>{{ brand.name }}</td>
-      </tr>
-    </tbody>
-  </table>
+<div *ngIf="brands" class="card mb-3 mt-3">
+  <div class="card-header">
+    <h5 class="card-title">MARKALAR</h5>
+  </div>
+  <div class="card-body">
+    <table class="table table-light table-striped">
+      <thead>
+        <tr>
+          <th class="text-muted">Id</th>
+          <th class="text-muted">Marka</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let brand of brands">
+          <td>{{ brand.id }}</td>
+          <td>{{ brand.name }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
-<div *ngIf="colors" class="mb-3 mt-3">
-  <h3 class="text-secondary text-center">RENKLER</h3>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th class="text-primary">Id</th>
-        <th class="text-primary">Renk</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let color of colors">
-        <td>{{ color.id }}</td>
-        <td>{{ color.name }}</td>
-      </tr>
-    </tbody>
-  </table>
+<div *ngIf="colors" class="card mb-3 mt-3">
+  <div class="card-header">
+    <h5 class="card-title">RENKLER</h5>
+  </div>
+  <div class="card-body">
+    <table class="table table-light table-striped">
+      <thead>
+        <tr>
+          <th class="text-muted">Id</th>
+          <th class="text-muted">Renk</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let color of colors">
+          <td>{{ color.id }}</td>
+          <td>{{ color.name }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
-<div class="mb-3 mt-3">
-  <h3 class="text-secondary text-center">ARABA EKLEME</h3>
-  <form [formGroup]="carAddForm">
-    <label for="brandId" class="form-group text-primary">Marka Id</label>
-    <div class="form-group">
-      <input
-        id="brandId"
-        type="number"
-        formControlName="brandId"
-        class="form-control"
-      />
-    </div>
-    <label for="colorId" class="form-group text-primary">Renk Id</label>
-    <div class="form-group">
-      <input
-        id="colorId"
-        type="number"
-        formControlName="colorId"
-        class="form-control"
-      />
-    </div>
-    <label for="model" class="form-group text-primary">Model</label>
-    <div class="form-group">
-      <input
-        id="model"
-        type="text"
-        formControlName="model"
-        class="form-control"
-      />
-    </div>
-    <label for="modelYear" class="form-group text-primary">Yıl</label>
-    <div class="form-group">
-      <input
-        id="modelYear"
-        type="text"
-        formControlName="modelYear"
-        class="form-control"
-      />
-    </div>
-    <label for="dailyPrice" class="form-group text-primary">Ücret</label>
-    <div class="form-group">
-      <input
-        id="dailyPrice"
-        type="number"
-        formControlName="dailyPrice"
-        class="form-control"
-      />
-    </div>
-    <label for="description" class="form-group text-primary">Açıklama</label>
-    <div class="form-group">
-      <input
-        id="description"
-        type="text"
-        formControlName="description"
-        class="form-control"
-      />
-    </div>
-  </form>
-</div>
-<div class="mb-3 mt-3">
-  <div class="d-grid gap-2">
-  <button (click)="add()" type="button" class="btn btn-success">Ekle</button>
-</div>
+<div class="card mb-3 mt-3">
+  <div class="card-header">
+    <h5 class="card-title">Araba Ekleme</h5>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="carAddForm">
+      <label for="brandId" class="form-group">Marka Id</label>
+      <div class="form-group">
+        <input
+          id="brandId"
+          type="number"
+          formControlName="brandId"
+          class="form-control"
+        />
+      </div>
+      <label for="colorId" class="form-group">Renk Id</label>
+      <div class="form-group">
+        <input
+          id="colorId"
+          type="number"
+          formControlName="colorId"
+          class="form-control"
+        />
+      </div>
+      <label for="model" class="form-group">Model</label>
+      <div class="form-group">
+        <input
+          id="model"
+          type="text"
+          formControlName="model"
+          class="form-control"
+        />
+      </div>
+      <label for="modelYear" class="form-group">Yıl</label>
+      <div class="form-group">
+        <input
+          id="modelYear"
+          type="text"
+          formControlName="modelYear"
+          class="form-control"
+        />
+      </div>
+      <label for="dailyPrice" class="form-group">Ücret</label>
+      <div class="form-group">
+        <input
+          id="dailyPrice"
+          type="number"
+          formControlName="dailyPrice"
+          class="form-control"
+        />
+      </div>
+      <label for="description" class="form-group">Açıklama</label>
+      <div class="form-group">
+        <input
+          id="description"
+          type="text"
+          formControlName="description"
+          class="form-control"
+        />
+      </div>
+      <div class="d-grid gap-2 mt-3 mb-3">
+        <button (click)="add()" type="button" class="btn btn-success">
+          Ekle
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
 
-<div *ngIf="cars" class="mb-3 mt-3">
-    <h3 class="text-secondary text-center">ARABALAR</h3>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th class="text-primary">Marka</th>
-        <th class="text-primary">Model</th>
-        <th class="text-primary">Yıl</th>
-        <th class="text-primary">Renk</th>
-        <th class="text-primary">Günlük Ücret</th>
-        <th class="text-primary">Güncelleme</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let car of cars">
-        <td>{{ car.brandName }}</td>
-        <td>{{ car.model }}</td>
-        <td>{{ car.modelYear }}</td>
-        <td>{{ car.colorName }}</td>
-        <td>{{ car.dailyPrice }} ₺</td>
-        <td>
-          <button
-            routerLink="/car/update/{{ car.id }}"
-            type="button"
-            class="btn btn-success"
-          >
-            Güncelle
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div *ngIf="cars" class="card mb-3 mt-3">
+  <div class="card-header">
+    <h5 class="card-title">ARABALAR</h5>
+  </div>
+  <div class="card-body">
+    <table class="table table-light table-striped">
+      <thead>
+        <tr>
+          <th class="text-muted">Marka</th>
+          <th class="text-muted">Model</th>
+          <th class="text-muted">Yıl</th>
+          <th class="text-muted">Renk</th>
+          <th class="text-muted">Günlük Ücret</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let car of cars">
+          <td>{{ car.brandName }}</td>
+          <td>{{ car.model }}</td>
+          <td>{{ car.modelYear }}</td>
+          <td>{{ car.colorName }}</td>
+          <td>{{ car.dailyPrice }} ₺</td>
+          <td>
+            <button
+              routerLink="/car/update/{{ car.id }}"
+              type="button"
+              class="btn btn-success"
+            >
+              Güncelle
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

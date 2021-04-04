@@ -1,8 +1,6 @@
 <div class="card mb-3 mt-3">
   <div class="card-header">
-    <div class="card-title">
-      <h5 class="card-text text-secondary">Marka Ekle</h5>
-    </div>
+    <h5 class="card-title">Marka Ekle</h5>
   </div>
   <div class="card-body">
     <button (click)="list()" type="button" class="btn btn-success">
@@ -11,25 +9,29 @@
     <button (click)="deList()" type="button" class="btn btn-danger ms-3">
       Markaları Gizle
     </button>
-    <div class="mb-3 mt-3">
-      <div *ngIf="brands" class="mb-3 mt-3">
-        <table class="table table-light table-striped">
-          <tbody>
-            <tr *ngFor="let brand of brands">
-              <td>{{ brand.name }}</td>
-              <td>
-                <button
-                  routerLink="/brand/update/{{ brand.id }}"
-                  type="button"
-                  class="btn btn-success"
-                >
-                  Güncelle
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <div *ngIf="brands" class="mb-3 mt-3">
+      <table class="table table-light table-striped">
+        <thead>
+          <tr>
+            <th class="text-muted">Marka</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let brand of brands">
+            <td>{{ brand.name }}</td>
+            <td>
+              <button
+                routerLink="/brand/update/{{ brand.id }}"
+                type="button"
+                class="btn btn-success"
+              >
+                Güncelle
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     <div class="mb-3 mt-3">
       <form [formGroup]="brandAddForm">
@@ -42,14 +44,12 @@
             class="form-control"
           />
         </div>
+        <div class="d-grid gap-2 mb-3 mt-3">
+          <button (click)="add()" type="button" class="btn btn-primary">
+            Ekle
+          </button>
+        </div>
       </form>
-    </div>
-    <div class="mb-3 mt-3">
-      <div class="d-grid gap-2">
-        <button (click)="add()" type="button" class="btn btn-primary">
-          Ekle
-        </button>
-      </div>
     </div>
   </div>
 </div>
