@@ -8,6 +8,7 @@ import {
 import { ToastrService } from 'ngx-toastr';
 import { Brand } from 'src/app/models/brand';
 import { BrandService } from 'src/app/services/brand.service';
+import { MessagesService } from 'src/app/services/messages.service';
 
 @Component({
   selector: 'app-brand-add',
@@ -17,13 +18,14 @@ import { BrandService } from 'src/app/services/brand.service';
 export class BrandAddComponent implements OnInit {
   brandAddForm: FormGroup;
   brand: Brand;
-  brands:Brand[];
-  emptyBrands:Brand[];
+  brands: Brand[];
+  emptyBrands: Brand[];
 
   constructor(
     private formBuilder: FormBuilder,
     private brandService: BrandService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
+    private messagesService: MessagesService
   ) {}
 
   ngOnInit(): void {
@@ -39,23 +41,37 @@ export class BrandAddComponent implements OnInit {
   add() {
     if (this.brandAddForm.valid) {
       this.brand = Object.assign({}, this.brandAddForm.value);
-      this.brandService.add(this.brand).subscribe((response) => {
-        if(response.success){
-          this.toastrService.success(response.message, "Marka");
-          this.list();
-        } 
-      });
+      this.brandService.add(this.brand).subscribe(
+        (response) => {
+          if (response.success) {
+            this.toastrService.success(response.message, 'Marka');
+            this.list();
+          }
+        },
+        (responseError) => {
+          this.toastrService.error(responseError.error.message);
+        }
+      );
+    } else {
+      this.toastrService.error(this.messagesService.notNullMessage, 'Marka Ekleme');
     }
   }
 
-  list(){
-    this.brandService.getBrands().subscribe((response)=>{
-      this.brands = response.data;
-      return this.brands;
-    });
+  list() {
+    this.brandService.getBrands().subscribe(
+      (response) => {
+        this.toastrService.success(response.message, 'Marka Ekleme');
+        this.brands = response.data;
+        return this.brands;
+      },
+      (responseError) => {
+        this.toastrService.error(responseError.errr.message, 'Marka Ekleme');
+      }
+    );
   }
 
-  deList(){
+  deList() {
     this.brands = this.emptyBrands;
+    this.toastrService.success('Markalar gizlendi', 'Marka Ekleme');
   }
 }

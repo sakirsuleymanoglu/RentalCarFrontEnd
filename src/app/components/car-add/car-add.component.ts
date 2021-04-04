@@ -5,6 +5,7 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { Brand } from 'src/app/models/brand';
 import { Car } from 'src/app/models/car';
 import { CarDto } from 'src/app/models/carDto';
@@ -12,6 +13,7 @@ import { Color } from 'src/app/models/color';
 import { BrandService } from 'src/app/services/brand.service';
 import { CarService } from 'src/app/services/car.service';
 import { ColorService } from 'src/app/services/color.service';
+import { MessagesService } from 'src/app/services/messages.service';
 
 @Component({
   selector: 'app-car-add',
@@ -29,7 +31,9 @@ export class CarAddComponent implements OnInit {
     private formBuilder: FormBuilder,
     private carService: CarService,
     private brandService: BrandService,
-    private colorService: ColorService
+    private colorService: ColorService,
+    private toastrService: ToastrService,
+    private messagesService: MessagesService
   ) {}
 
   ngOnInit(): void {
@@ -69,11 +73,22 @@ export class CarAddComponent implements OnInit {
   }
 
   add() {
-    if(this.carAddForm.valid){
+    if (this.carAddForm.valid) {
       this.car = Object.assign({}, this.carAddForm.value);
-      this.carService.add(this.car).subscribe((response)=>{
-        this.listCars();
-      });
+      this.carService.add(this.car).subscribe(
+        (response) => {
+          this.toastrService.success(response.message, 'Araba Ekleme');
+          this.listCars();
+        },
+        (responseError) => {
+          this.toastrService.error(responseError.error.message, 'Araba Ekleme');
+        }
+      );
+    } else {
+      this.toastrService.error(
+        this.messagesService.notNullMessage,
+        'Araba Ekleme'
+      );
     }
   }
 }

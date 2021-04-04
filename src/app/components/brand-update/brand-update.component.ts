@@ -8,6 +8,8 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { MessagesService } from 'src/app/services/messages.service';
 
 @Component({
   selector: 'app-brand-update',
@@ -22,11 +24,13 @@ export class BrandUpdateComponent implements OnInit {
   formBrandData: Brand;
   formSelectedBrandData: Brand;
   brandUpdateForm: FormGroup;
-  selectedBrandUpdateForm:FormGroup;
+  selectedBrandUpdateForm: FormGroup;
   constructor(
     private brandService: BrandService,
     private activatedRoute: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toastrService: ToastrService,
+    private messagesService: MessagesService
   ) {}
 
   ngOnInit(): void {
@@ -51,7 +55,7 @@ export class BrandUpdateComponent implements OnInit {
     });
   }
 
-  createSelectedUpdateBrandForm(){
+  createSelectedUpdateBrandForm() {
     this.selectedBrandUpdateForm = this.formBuilder.group({
       name: ['', Validators.required],
     });
@@ -63,16 +67,30 @@ export class BrandUpdateComponent implements OnInit {
   }
 
   update() {
-    if(this.brandUpdateForm.valid){
+    if (this.brandUpdateForm.valid) {
       this.formBrandData = Object.assign({}, this.brandUpdateForm.value);
 
       this.brandService.getBrand(this.updatedBrand.id).subscribe((response) => {
         this.updatedBrand = response.data;
         this.updatedBrand.name = this.formBrandData.name;
-        this.brandService.update(this.updatedBrand).subscribe((response) => {
-          this.list();
-        });
+        this.brandService.update(this.updatedBrand).subscribe(
+          (response) => {
+            this.toastrService.success(response.message, 'Marka Güncelleme');
+            this.list();
+          },
+          (errorResponse) => {
+            this.toastrService.error(
+              errorResponse.error.message,
+              'Marka Güncelleme'
+            );
+          }
+        );
       });
+    } else {
+      this.toastrService.error(
+        this.messagesService.notNullMessage,
+        'Marka Güncelleme'
+      );
     }
   }
 
@@ -82,12 +100,29 @@ export class BrandUpdateComponent implements OnInit {
     });
   }
 
-  selectedBrandUpdate(){
-    if(this.selectedBrandUpdateForm.valid){
-      this.formSelectedBrandData = Object.assign({}, this.selectedBrandUpdateForm.value);
+  selectedBrandUpdate() {
+    if (this.selectedBrandUpdateForm.valid) {
+      this.formSelectedBrandData = Object.assign(
+        {},
+        this.selectedBrandUpdateForm.value
+      );
       this.brand.name = this.formSelectedBrandData.name;
-      this.brandService.update(this.brand).subscribe((response) => {
-      });
+      this.brandService.update(this.brand).subscribe(
+        (response) => {
+          this.toastrService.success(response.message, 'Marka Güncelleme');
+        },
+        (responseError) => {
+          this.toastrService.error(
+            responseError.error.message,
+            'Marka Güncelleme'
+          );
+        }
+      );
+    } else {
+      this.toastrService.error(
+        this.messagesService.notNullMessage,
+        'Marka Güncelleme'
+      );
     }
   }
 }

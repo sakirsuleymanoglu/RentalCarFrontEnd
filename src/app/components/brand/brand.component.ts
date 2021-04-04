@@ -8,7 +8,7 @@ import { BrandService } from 'src/app/services/brand.service';
   styleUrls: ['./brand.component.css'],
 })
 export class BrandComponent implements OnInit {
-  brands: Brand[] = [];
+  brands: Brand[];
   currentBrand: Brand;
 
   constructor(private brandService: BrandService) {}
@@ -23,8 +23,7 @@ export class BrandComponent implements OnInit {
     });
   }
 
-  setCurrentBrand(brand:Brand){
+  setCurrentBrand(brand: Brand) {
     this.currentBrand = brand;
   }
-
 }

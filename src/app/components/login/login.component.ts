@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private toastrService: ToastrService,
-    private localStorageService:LocalStorageService
+    private localStorageService: LocalStorageService
   ) {}
 
   ngOnInit(): void {
@@ -52,7 +52,10 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.userForLoginDto).subscribe(
         (response) => {
           this.localStorageService.add('token', response.data.token);
-          this.localStorageService.add('fullName', (this.user.firstName + ' ' + this.user.lastName));
+          this.localStorageService.add(
+            'fullName',
+            this.user.firstName + ' ' + this.user.lastName
+          );
           this.localStorageService.add('userId', this.user.id);
           this.toastrService.success(response.message, 'Giriş Yap');
           window.location.reload();
