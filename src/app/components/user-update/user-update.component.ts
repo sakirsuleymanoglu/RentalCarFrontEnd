@@ -4,6 +4,7 @@ import { UserService } from 'src/app/services/user.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserForRegisterDto } from 'src/app/models/userForRegisterDto';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-update',
@@ -17,7 +18,8 @@ export class UserUpdateComponent implements OnInit {
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder,
-    private router: Router
+    private router: Router,
+    private toastrService:ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -49,9 +51,14 @@ export class UserUpdateComponent implements OnInit {
               'fullName',
               userForRegisterDto.firstName + ' ' + userForRegisterDto.lastName
             );
-            window.location.reload();
+            this.toastrService.success(response.message, 'Bilgileri Güncelle');
+            window.location.reload();  
           }
+        },(responseError)=>{
+          this.toastrService.error(responseError.error.message, "Bilgileri Güncelle");
         });
+    }else{
+      this.toastrService.error("Boş bırakılamaz", "Bilgileri Güncelle");
     }
   }
 

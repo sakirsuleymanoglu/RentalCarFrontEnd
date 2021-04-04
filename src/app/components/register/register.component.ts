@@ -38,8 +38,13 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.valid) {
       let userForRegisterDto = Object.assign({}, this.registerForm.value);
       this.authService.register(userForRegisterDto).subscribe((response)=>{
+        this.toastrService.success(response.message, "Kayıt Ol");
         this.router.navigate(['login']);
+      },(responseError)=>{
+        this.toastrService.error(responseError.error.message, "Kayıt Ol");
       });
+    }else{
+      this.toastrService.error("Boş bırakılamaz","Kayıt Ol");
     }
   }
 }
