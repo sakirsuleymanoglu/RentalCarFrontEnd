@@ -6,11 +6,13 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-
-import { Car } from 'src/app/models/car';
+import { ToastrService } from 'ngx-toastr';
+import { CarDto } from 'src/app/models/carDto';
+import { Customer } from 'src/app/models/customer';
 import { Rental } from 'src/app/models/rental';
 import { CarService } from 'src/app/services/car.service';
-import { RentalService } from 'src/app/services/rental.service';
+import { CustomerService } from 'src/app/services/customer.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-rental-add',
@@ -20,29 +22,28 @@ import { RentalService } from 'src/app/services/rental.service';
 export class RentalAddComponent implements OnInit {
   rentalAddForm: FormGroup;
   rental: Rental;
-  carDailyPrice: number;
-  totalPrice: number;
-  car:Car;
-  rentalCarId:number;
-  
+  customer: Customer;
+  car: CarDto;
 
   constructor(
     private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private rentalService: RentalService,
-    private carService: CarService
+    private customerService: CustomerService,
+    private localStorageService: LocalStorageService,
+    private carService: CarService,
+    private toastrService:ToastrService
   ) {}
 
   ngOnInit(): void {
     this.createProductAddForm();
+    this.getCustomerByUserId();
+    this.getCarsById();
   }
 
   createProductAddForm() {
     this.activatedRoute.params.subscribe((params) => {
       if (params['carId']) {
         this.rentalAddForm = this.formBuilder.group({
-          carId: [params['carId'], Validators.required],
-          customerId: ['', Validators.required],
           rentDate: ['', Validators.required],
           returnDate: ['', Validators.required],
         });
@@ -52,7 +53,24 @@ export class RentalAddComponent implements OnInit {
 
   accept() {
     if (this.rentalAddForm.valid) {
-      return Object.assign({}, this.rentalAddForm.value);
+      this.rental = Object.assign({}, this.rentalAddForm.value);
+      this.localStorageService.add('rentDate', this.rental.rentDate);
+      this.localStorageService.add('returnDate', this.rental.returnDate);
     }
+  }
+
+  getCustomerByUserId() {
+    let userId: any = this.localStorageService.get('userId');
+    this.customerService.getCustomerByUserId(userId).subscribe((respone) => {
+      this.customer = respone.data;
+      this.localStorageService.add('customerId', this.customer.id);
+    });
+  }
+
+  getCarsById() {
+    let carId: any = this.localStorageService.get('carId');
+    this.carService.getDetailsOfCarByCarId(carId).subscribe((response) => {
+      this.car = response.data;
+    });
   }
 }

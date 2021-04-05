@@ -5,11 +5,14 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Car } from 'src/app/models/car';
 import { CreditCard } from 'src/app/models/creditCard';
 import { Rental } from 'src/app/models/rental';
 import { CarService } from 'src/app/services/car.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { MessagesService } from 'src/app/services/messages.service';
 import { PaymentService } from 'src/app/services/payment.service';
 import { RentalService } from 'src/app/services/rental.service';
 
@@ -21,24 +24,28 @@ import { RentalService } from 'src/app/services/rental.service';
 export class PaymentComponent implements OnInit {
   paymentOperationForm: FormGroup;
   rental: Rental;
-  carId: number;
   creditCard: CreditCard;
-  customerId: number;
-  rentDate: string;
-  returnDate: string;
   totalPrice: number;
   car: Car;
+  modal: string;
+  state: boolean;
+  cardNumber: any;
 
   constructor(
     private formBuilder: FormBuilder,
     private rentalService: RentalService,
     private activatedRoute: ActivatedRoute,
     private paymentService: PaymentService,
-    private carService: CarService
+    private carService: CarService,
+    private localStorageService: LocalStorageService,
+    private toastrService: ToastrService,
+    private messagesService: MessagesService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.createPaymentOperationForm();
+    this.cardNumber = this.localStorageService.get('creditCardNumber');
   }
 
   createPaymentOperationForm() {
@@ -51,69 +58,136 @@ export class PaymentComponent implements OnInit {
     });
   }
 
-  pay(rental: Rental, totalPrice: number) {
+  payWithBeforeCard(){
+    let userBalance = this.localStorageService.get('balance');
+    let dailyPrice: any = this.localStorageService.get('dailyPrice');
+    let rentDate: any = this.localStorageService.get('rentDate');
+    let returnDate: any = this.localStorageService.get('returnDate');
+    let days =
+      (new Date(returnDate).getTime() - new Date(rentDate).getTime()) /
+      86400000;
+    this.totalPrice = parseInt(dailyPrice) * days;
+
+    if (!this.paymentService.pay(userBalance, this.totalPrice)) {
+      this.toastrService.error(
+        this.messagesService.insufficientBalance,
+        'Ödeme'
+      );
+    } else {
+      let carId: any = this.localStorageService.get('carId');
+      let customerId: any = this.localStorageService.get('customerId');
+      let rentDate: any = this.localStorageService.get('rentDate');
+      let returnDate: any = this.localStorageService.get('returnDate');
+
+      this.rental = {
+        carId: parseInt(carId),
+        customerId: parseInt(customerId),
+        rentDate: rentDate.toString(),
+        returnDate: returnDate.toString(),
+      };
+
+      this.rentalService.add(this.rental).subscribe(
+        (response) => {
+          this.toastrService.success(response.message, 'Araba Kiralama');
+          this.router.navigate(['/']);
+        },
+        (responseError) => {
+          this.toastrService.error(
+            responseError.error.message,
+            'Araba Kiralama'
+          );
+        }
+      );
+    }
+  }
+
+
+  pay() {
     if (this.paymentOperationForm.valid) {
-      let formCreditCard = Object.assign({}, this.paymentOperationForm.value);
+      this.creditCard = Object.assign({}, this.paymentOperationForm.value);
 
-      this.activatedRoute.params.subscribe((params) => {
-        if (params['carId']) {
-          this.carId = params['carId'];
-        }
+      let userBalance = this.localStorageService.get('balance');
+      let dailyPrice: any = this.localStorageService.get('dailyPrice');
+      let rentDate: any = this.localStorageService.get('rentDate');
+      let returnDate: any = this.localStorageService.get('returnDate');
+      let days =
+        (new Date(returnDate).getTime() - new Date(rentDate).getTime()) /
+        86400000;
+      this.totalPrice = parseInt(dailyPrice) * days;
 
-        if (params['customerId']) {
-          this.customerId = params['customerId'];
-        }
-
-        if (params['rentDate']) {
-          this.rentDate = params['rentDate'];
-        }
-
-        if (params['returnDate']) {
-          this.returnDate = params['returnDate'];
-        }
+      if (!this.paymentService.pay(userBalance, this.totalPrice)) {
+        this.toastrService.error(
+          this.messagesService.insufficientBalance,
+          'Ödeme'
+        );
+      } else {
+        let carId: any = this.localStorageService.get('carId');
+        let customerId: any = this.localStorageService.get('customerId');
+        let rentDate: any = this.localStorageService.get('rentDate');
+        let returnDate: any = this.localStorageService.get('returnDate');
 
         this.rental = {
-          carId: this.carId,
-          customerId: this.customerId,
-          rentDate: this.rentDate,
-          returnDate: this.returnDate,
+          carId: parseInt(carId),
+          customerId: parseInt(customerId),
+          rentDate: rentDate.toString(),
+          returnDate: returnDate.toString(),
         };
 
-        let days =
-          (new Date(this.returnDate).getTime() -
-            new Date(this.rentDate).getTime()) /
-          86400000;
-
-
-        this.carService.getCarById(this.carId).subscribe((response) => {
-          this.car = response.data;
-
-          this.totalPrice = this.car.dailyPrice * days;
-
-          this.paymentService
-            .getCreditCardByCustomerId(this.customerId)
-            .subscribe((response) => {
-              this.creditCard = response.data;
-              if (
-                this.creditCard.cardNumber === formCreditCard.cardNumber &&
-                this.creditCard.cardLastUseDate ===
-                  formCreditCard.cardLastUseDate &&
-                this.creditCard.securityValue ===
-                  formCreditCard.securityValue &&
-                this.creditCard.firstName === formCreditCard.firstName &&
-                this.creditCard.lastName === formCreditCard.lastName
-              ) {
-                this.rentalService
-                  .add(this.rental, this.totalPrice)
-                  .subscribe((response) => {
-                    alert(response.success);
-                  });
-              } else {
-              
+        this.rentalService.add(this.rental).subscribe(
+          (response) => {
+            this.toastrService.success(response.message, 'Araba Kiralama');
+            if (!this.cardNumber) {
+              if (window.confirm('Kredi kartı kaydedilsin mi?')) {
+                this.saveCreditCard();
               }
-            });
-        });
-      });
+            }
+          },
+          (responseError) => {
+            this.toastrService.error(
+              responseError.error.message,
+              'Araba Kiralama'
+            );
+          }
+        );
+      }
+    } else {
+      this.toastrService.error(
+        this.messagesService.notNullMessage,
+        'Araba Kiralama'
+      );
     }
+  }
+
+  saveCreditCard() {
+    this.localStorageService.add(
+      'creditCardFirstName',
+      this.creditCard.firstName
+    );
+    this.localStorageService.add(
+      'creditCardLastName',
+      this.creditCard.lastName
+    );
+    this.localStorageService.add(
+      'creditCardNumber',
+      this.creditCard.cardNumber
+    );
+    this.localStorageService.add(
+      'creditCardLastUseDate',
+      this.creditCard.cardLastUseDate
+    );
+    this.localStorageService.add(
+      'creditCardSecurityValue',
+      this.creditCard.securityValue
+    );
+    this.toastrService.success(
+      this.messagesService.creditCardInsertionSuccessful,
+      'Kredi Kartı'
+    );
+    this.router.navigate(['/']);
+  }
+
+  changeCreditCard() {
+    this.localStorageService.delete('creditCardNumber');
+    window.location.reload();
   }
 }

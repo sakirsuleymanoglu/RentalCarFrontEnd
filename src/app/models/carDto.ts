@@ -8,4 +8,5 @@ export interface CarDto{
     colorName:string;
     images:CarImage[];
     dailyPrice:number;
+    findeks?:number;
 }

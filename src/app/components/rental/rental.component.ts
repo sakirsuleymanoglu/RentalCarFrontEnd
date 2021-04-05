@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Rental } from 'src/app/models/rental';
 import { RentalDto } from 'src/app/models/rentalDto';
-
 
 @Component({
   selector: 'app-rental',
@@ -9,16 +7,9 @@ import { RentalDto } from 'src/app/models/rentalDto';
   styleUrls: ['./rental.component.css'],
 })
 export class RentalComponent implements OnInit {
-  rentalsDto: RentalDto[] = [];
-  
-  constructor(
- 
-  ) {}
+  rentalsDto: RentalDto[];
+
+  constructor() {}
 
   ngOnInit(): void {}
-
-
-
-  
 }
-

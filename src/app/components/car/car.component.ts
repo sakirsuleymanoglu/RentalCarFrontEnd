@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Car } from 'src/app/models/car';
 import { CarDto } from 'src/app/models/carDto';
+import { AuthService } from 'src/app/services/auth.service';
 import { CarService } from 'src/app/services/car.service';
 import { CarImageService } from 'src/app/services/carImage.service.';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-car',
@@ -19,14 +21,22 @@ export class CarComponent implements OnInit {
   filterByModel:string;
   filterByModelYear:string;
   filterByColor:string;
- 
+  userFindeks:any;
+  balance:any;
+  isAuth:boolean;
+
   constructor(
     private carService: CarService,
     private activatedRoute: ActivatedRoute,
-    private carImageService:CarImageService
+    private carImageService:CarImageService,
+    private localStorageService:LocalStorageService,
+    private authService:AuthService
   ) {}
 
   ngOnInit(): void {
+    if(this.authService.isAuthenticated()){
+      this.isAuth = true;
+    }
     this.activatedRoute.params.subscribe((params) => {
       if (params["brandId"]) {
         this.getDetailsOfCarsByBrand(params["brandId"]);
@@ -36,6 +46,8 @@ export class CarComponent implements OnInit {
         this.getDetailsOfCars();
       }
     });
+    this.userFindeks = this.localStorageService.get('userFindeks');
+    this.balance = this.localStorageService.get('balance');
   }
 
   getCars() {
@@ -47,6 +59,9 @@ export class CarComponent implements OnInit {
   getDetailsOfCars() {
     this.carService.getDetailsOfCars().subscribe((response) => {
       this.carsDto = response.data;
+      this.carsDto.forEach(car => {
+        car.findeks = this.getRndInteger(0,1900);
+      });
     });
   }
 
@@ -64,9 +79,16 @@ export class CarComponent implements OnInit {
 
   setCurrentCar(car: CarDto) {
     this.currentCar = car;
+    this.localStorageService.add('carFindeks', this.currentCar.findeks);
+    this.localStorageService.add('carId', this.currentCar.id);
+    this.localStorageService.add('dailyPrice', this.currentCar.dailyPrice);
   }
 
   getImage(imagePath:string){
     return this.carImageService.getImage(imagePath);
+  }
+
+  getRndInteger(min:number, max:number) {
+    return Math.floor(Math.random() * (max - min)) + min;
   }
 }

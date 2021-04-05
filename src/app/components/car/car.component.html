@@ -1,3 +1,10 @@
+<div *ngIf="isAuth" class="mb-3 mt-3">
+  <div class="alert alert-info">
+    <p>Findeks Puanınız: {{ userFindeks }}</p>
+    <p>Bakiyeniz: {{ balance }} ₺</p>
+  </div>
+</div>
+
 <div class="mb-3 mt-3">
   <div class="card">
     <div class="card-header">
@@ -47,6 +54,15 @@
 <div class="card mt-3 mb-3">
   <div class="card-body">
     <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th>Minimum Findeks</th>
+        </tr>
+      </thead>
       <tbody>
         <tr
           *ngFor="
@@ -75,6 +91,7 @@
               Detaya Git
             </button>
           </td>
+          <td class="text-center">{{ car.findeks }}</td>
         </tr>
       </tbody>
     </table>

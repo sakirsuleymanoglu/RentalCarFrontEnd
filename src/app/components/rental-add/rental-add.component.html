@@ -1,52 +1,56 @@
-<div class="mb-3 mt-3">
-  <form [formGroup]="rentalAddForm">
-    <label for="carId" class="form-group">Araç Numarası</label>
-    <div class="form-group">
-      <input
-        id="carId"
-        type="number"
-        formControlName="carId"
-        class="form-control"
-      />
-    </div>
-    <label for="customerId" class="form-group mt-3">Müşteri Numarası</label>
-    <div class="form-group">
-      <input
-        id="customerId"
-        type="number"
-        formControlName="customerId"
-        class="form-control"
-      />
-    </div>
-    <label for="customerId" class="form-group mt-3">Kiralama Tarihi</label>
-    <div class="form-group">
-      <input
-        id="rentDate"
-        type="date"
-        formControlName="rentDate"
-        class="form-control"
-      />
-    </div>
-    <label for="customerId" class="form-group mt-3">Veriş Tarihi</label>
-    <div class="form-group">
-      <input
-        id="returnDate"
-        type="date"
-        formControlName="returnDate"
-        class="form-control"
-      />
-    </div>
-  </form>
+<div class="card mb-3 mt-3">
+  <div class="card-header">
+    <h5 class="card-title">Müşteri</h5>
+  </div>
+  <div class="card-body">
+    <p class="card-text">
+      <span class="text-muted">Araba:</span>
+      {{ car.brandName }}
+      {{ car.model }}
+      {{ car.modelYear }}
+      {{ car.colorName }}
+    </p>
+    <p class="card-text">
+      <span class="text-muted">Müşteri Numarası:</span>
+      {{ customer.id }}
+    </p>
+  </div>
 </div>
-<div class="mb-3 mt-3">
-  <button
-    (click)="accept()"
-    type="button"
-    class="btn btn-primary form-group"
-    routerLink="/cars/car/{{ accept().carId }}/rental/payment/customer/{{
-      accept().customerId
-    }}/rentDate/{{ accept().rentDate }}/returnDate/{{ accept().returnDate }}"
-  >
-    Onayla
-  </button>
+
+<div class="card mb-3 mt-3">
+  <div class="card-header">
+    <h5 class="card-title">Tarih Seç</h5>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="rentalAddForm">
+      <label for="customerId" class="form-group mt-3">Alış Tarihi</label>
+      <div class="form-group">
+        <input
+          id="rentDate"
+          type="date"
+          formControlName="rentDate"
+          class="form-control"
+        />
+      </div>
+      <label for="customerId" class="form-group mt-3">Veriş Tarihi</label>
+      <div class="form-group">
+        <input
+          id="returnDate"
+          type="date"
+          formControlName="returnDate"
+          class="form-control"
+        />
+      </div>
+      <div class="d-grid gap-2 mb-3 mt-3">
+        <button
+          (click)="accept()"
+          type="button"
+          class="btn btn-primary form-group"
+          routerLink="/car/rental/payment"
+        >
+          Onayla
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

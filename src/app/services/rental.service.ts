@@ -19,8 +19,8 @@ export class RentalService {
     return this.httpClient.get<ListResponseModel<RentalDto>>(newPath);
   }
 
-  add(rental: Rental, totalPrice: number): Observable<ResponseModel> {
-    let newPath = this.apiUrl + 'Rentals/add?price=' + totalPrice;
+  add(rental: Rental): Observable<ResponseModel> {
+    let newPath = this.apiUrl + 'Rentals/add'
     return this.httpClient.post<ResponseModel>(newPath, rental);
   }
 }

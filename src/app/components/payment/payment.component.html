@@ -1,71 +1,92 @@
-<div class="mb-3 mt-3">
-  <div class="card" style="width: 50rem">
-    <div class="card-body">
-      <h5 class="card-title">Kart Bilgileri</h5>
-      <form [formGroup]="paymentOperationForm">
-        <label for="cardNumber" class="form-group">Kart Numarası</label>
-        <div class="form-group">
-          <input
-            id="cardNumber"
-            type="string"
-            formControlName="cardNumber"
-            class="form-control"
-          />
-        </div>
+<div *ngIf="!cardNumber" class="card mb-3 mt-3">
+  <div class="card-header">
+    <h5 class="card-title">Ödeme</h5>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="paymentOperationForm">
+      <label for="cardNumber" class="form-group">Kart Numarası</label>
+      <div class="form-group">
+        <input
+          id="cardNumber"
+          type="string"
+          formControlName="cardNumber"
+          class="form-control"
+        />
+      </div>
 
-        <label for="cardLastUseDate" class="form-group"
-          >Son Kullanma Tarihi (Ay/Yıl)</label
-        >
-        <div class="form-group">
-          <input
-            id="cardLastUseDate"
-            type="string"
-            formControlName="cardLastUseDate"
-            class="form-control"
-          />
-        </div>
+      <label for="cardLastUseDate" class="form-group"
+        >Son Kullanma Tarihi (Ay/Yıl)</label
+      >
+      <div class="form-group">
+        <input
+          id="cardLastUseDate"
+          type="string"
+          formControlName="cardLastUseDate"
+          class="form-control"
+        />
+      </div>
 
-        <label for="securityValue" class="form-group"
-          >Kart 3 Haneli Güvenlik Değeri</label
-        >
-        <div class="form-group">
-          <input
-            id="securityValue"
-            type="string"
-            formControlName="securityValue"
-            class="form-control"
-          />
-        </div>
+      <label for="securityValue" class="form-group"
+        >Kart 3 Haneli Güvenlik Değeri</label
+      >
+      <div class="form-group">
+        <input
+          id="securityValue"
+          type="string"
+          formControlName="securityValue"
+          class="form-control"
+        />
+      </div>
 
-        <label for="firstName" class="form-group">Adınız</label>
-        <div class="form-group">
-          <input
-            id="firstName"
-            type="string"
-            formControlName="firstName"
-            class="form-control"
-          />
-        </div>
+      <label for="firstName" class="form-group">Adınız</label>
+      <div class="form-group">
+        <input
+          id="firstName"
+          type="string"
+          formControlName="firstName"
+          class="form-control"
+        />
+      </div>
 
-        <label for="lastName" class="form-group">Soyadınız</label>
-        <div class="form-group">
-          <input
-            id="lastName"
-            type="string"
-            formControlName="lastName"
-            class="form-control"
-          />
-        </div>
-      </form>
-    </div>
+      <label for="lastName" class="form-group">Soyadınız</label>
+      <div class="form-group">
+        <input
+          id="lastName"
+          type="string"
+          formControlName="lastName"
+          class="form-control"
+        />
+      </div>
+      <div class="d-grid gap-2 mb-3 mt-3">
+        <button (click)="pay()" type="button" class="btn btn-primary">
+          Ödemeyi Yap
+        </button>
+      </div>
+    </form>
   </div>
 </div>
-<div class="mb-3 mt-3">
-  <button
-    (click)="pay(rental, totalPrice)"
-    type="button"
-    class="btn btn-primary"
-  >
-    Ödemeyi Yap
-  </button>
+
+<div *ngIf="cardNumber" class="card mb-3 mt-3">
+  <div class="card-header">
+    <h5 class="card-title">
+      Kayıtlı Kart
+    </h5>
+  </div>
+  <div class="card-body">
+    <p class="card-text">{{cardNumber}} numaralı kredi kartı ile ödeme yapmak ister misiniz?</p>
+    <button (click)="payWithBeforeCard()" type="button" class="btn btn-primary">
+      Ödemeyi Yap
+    </button>
+    <p class="card-text">
+      <a (click)="changeCreditCard()" class="nav-lik">
+        Başka bir kart ile ödeme yapacağım
+      </a>
+    </p>
+    
+  </div>
 </div>
+
+
+
+
+

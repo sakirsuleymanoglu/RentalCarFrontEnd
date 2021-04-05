@@ -38,6 +38,19 @@ export class NaviComponent implements OnInit {
     this.localStorageService.delete('token');
     this.localStorageService.delete('fullName');
     this.localStorageService.delete('userId');
+    this.localStorageService.delete('userFindeks');
+    this.localStorageService.delete('carFindeks');
+    this.localStorageService.delete('balance');
+    this.localStorageService.delete('creditCardFirstName');
+    this.localStorageService.delete('creditCardLastName');
+    this.localStorageService.delete('creditCardLastUseDate');
+    this.localStorageService.delete('creditCardSecurityValue');
+    this.localStorageService.delete('creditCardNumber');
+    this.localStorageService.delete('dailyPrice');
+    this.localStorageService.delete('carId');
+    this.localStorageService.delete('customerId');
+    this.localStorageService.delete('rentDate');
+    this.localStorageService.delete('returnDate');
     this.isAuthenticated = false;
   }
 

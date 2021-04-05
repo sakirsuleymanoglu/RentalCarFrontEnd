@@ -25,8 +25,7 @@ const routes: Routes = [
   { path: 'cars/car/:carId', component: CardtoComponent },
   { path: 'cars/car/:carId/rental/add', component: RentalAddComponent },
   {
-    path:
-      'cars/car/:carId/rental/payment/customer/:customerId/rentDate/:rentDate/returnDate/:returnDate',
+    path: 'car/rental/payment',
     component: PaymentComponent,
   },
   { path: 'car/add', component: CarAddComponent },

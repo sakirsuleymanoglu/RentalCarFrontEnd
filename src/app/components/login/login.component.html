@@ -1,11 +1,11 @@
 <div class="card mb-3 mt-3">
   <div class="card-header">
-    <h5 class="card-title text-secondary">GİRİŞ YAP</h5>
+    <h5 class="card-title">GİRİŞ YAP</h5>
   </div>
   <div class="card-body">
     <form [formGroup]="loginForm">
-      <div class="mb-3 mt-3 ms-3 me-3">
-        <label for="email" class="form-label">E-Posta</label>
+      <label for="email" class="form-label">E-Posta</label>
+      <div class="form-group">
         <input
           type="email"
           class="form-control"
@@ -13,8 +13,8 @@
           formControlName="email"
         />
       </div>
-      <div class="mb-3 mt-3 ms-3 me-3">
-        <label for="password" class="form-label">Parola</label>
+      <label for="password" class="form-label">Parola</label>
+      <div class="form-group">
         <input
           type="password"
           class="form-control"
@@ -22,14 +22,10 @@
           formControlName="password"
         />
       </div>
-      <div class="card-footer">
-        <div class="mb-3 mt-3 ms-3 me-3">
-          <div class="d-grid gap-2">
-            <button (click)="login()" type="submit" class="btn btn-primary">
-              Giriş Yap
-            </button>
-          </div>
-        </div>
+      <div class="d-grid gap-2 mb-3 mt-3">
+        <button (click)="login()" type="submit" class="btn btn-primary">
+          Giriş Yap
+        </button>
       </div>
     </form>
   </div>

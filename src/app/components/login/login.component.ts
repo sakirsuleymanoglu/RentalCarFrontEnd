@@ -57,6 +57,11 @@ export class LoginComponent implements OnInit {
             this.user.firstName + ' ' + this.user.lastName
           );
           this.localStorageService.add('userId', this.user.id);
+          this.localStorageService.add(
+            'userFindeks',
+            this.getRndInteger(0, 1900)
+          );
+          this.localStorageService.add('balance', this.getRndInteger(0, 10000));
           this.toastrService.success(response.message, 'Giriş Yap');
           window.location.reload();
         },
@@ -73,5 +78,9 @@ export class LoginComponent implements OnInit {
     this.userService.getUserByEMail(mail).subscribe((response) => {
       this.user = response.data;
     });
+  }
+
+  getRndInteger(min: number, max: number) {
+    return Math.floor(Math.random() * (max - min)) + min;
   }
 }

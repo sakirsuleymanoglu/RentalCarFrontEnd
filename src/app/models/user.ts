@@ -6,4 +6,6 @@ export interface User{
     passwordSalt:string;
     passwordHash:string;
     status:boolean;
+    balance?:number;
+    findeks?:number;
 }

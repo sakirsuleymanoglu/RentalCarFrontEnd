@@ -19,7 +19,7 @@ export class UserUpdateComponent implements OnInit {
     private userService: UserService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private toastrService:ToastrService
+    private toastrService: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -43,22 +43,26 @@ export class UserUpdateComponent implements OnInit {
         {},
         this.userUpdateForm.value
       );
-      this.userService
-        .update(userForRegisterDto, userId)
-        .subscribe((response) => {
+      this.userService.update(userForRegisterDto, userId).subscribe(
+        (response) => {
           if (response.success) {
             localStorage.setItem(
               'fullName',
               userForRegisterDto.firstName + ' ' + userForRegisterDto.lastName
             );
             this.toastrService.success(response.message, 'Bilgileri Güncelle');
-            window.location.reload();  
+            window.location.reload();
           }
-        },(responseError)=>{
-          this.toastrService.error(responseError.error.message, "Bilgileri Güncelle");
-        });
-    }else{
-      this.toastrService.error("Boş bırakılamaz", "Bilgileri Güncelle");
+        },
+        (responseError) => {
+          this.toastrService.error(
+            responseError.error.message,
+            'Bilgileri Güncelle'
+          );
+        }
+      );
+    } else {
+      this.toastrService.error('Boş bırakılamaz', 'Bilgileri Güncelle');
     }
   }
 

@@ -9,13 +9,15 @@ import { SingleResponseModel } from '../models/singleResponseModel';
 })
 export class PaymentService {
 
-  apiUrl = 'https://localhost:44394/api/';
-
-  constructor(private httpClient:HttpClient) { }
+  constructor() { }
   
-  getCreditCardByCustomerId(customerId:number):Observable<SingleResponseModel<CreditCard>>{
-    let newPath = this.apiUrl + 'Payments/getbycustomerid?customerId='+customerId;
-    return this.httpClient.get<SingleResponseModel<CreditCard>>(newPath);
+  pay(userBalance:any, totalPrice:any){
+    let balance = parseInt(userBalance);
+    let tPrice = parseInt(totalPrice);
+    if(balance>tPrice){
+      return true;
+    }
+    return false;
   }
 
 }
