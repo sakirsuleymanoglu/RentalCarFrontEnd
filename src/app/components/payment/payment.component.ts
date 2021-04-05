@@ -139,6 +139,8 @@ export class PaymentComponent implements OnInit {
             if (!this.cardNumber) {
               if (window.confirm('Kredi kartı kaydedilsin mi?')) {
                 this.saveCreditCard();
+              }else{
+                this.router.navigate(['/']);
               }
             }
           },
